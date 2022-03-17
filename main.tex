@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% nonofficial template %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+    paper=a4,
+    oneside,
+    fontsize=19pt
+    ]{book}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% global configuration %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Title&configuration/configuration}
+
+
+%%%%%%%%%%%%%%%%
+%% title page %%
+%%%%%%%%%%%%%%%%
+
+%the watermark on the title page-------------------
+%mainly refer to "ULBreport.cls" in https://it.overleaf.com/latex/templates/ulbreport-template/jzjgsqbnswmw
+\usepackage[pages=some]{background} %"pages=some" is used to select pages for the background. If you need it for all pages, just delete "[pages=some].
+\backgroundsetup{
+    firstpage = true,
+    scale=1,
+    color=black,
+    opacity=0.05,
+    angle=0,
+    position={6.3,-23.4},
+    contents={
+        \includegraphics[
+            height=20cm,
+            width=20cm,
+            keepaspectratio
+            ]{picture/image1.png}
+        }
+    }
+%the watermark on the title page-------------------
+%--------------------------------------------------
+
+
+%information settings------------------------------
+%mainly refer to "document_settings.tex" in https://www.overleaf.com/latex/templates/hpi-phd-thesis-template/tggbwxzmzvkr
+
+\newcommand{\printTitle}{}% The title of the thesis.
+\newcommand{\myTitle}[1]{\renewcommand{\printTitle}{#1}}
+
+\newcommand{\printAuthor}{}% The author’s name.
+\newcommand{\myName}[1]{\renewcommand{\printAuthor}{#1}}
+
+\newcommand{\printSupervisor}{}% The name of the author’s supervisor.
+\newcommand{\mySupervisor}[1]{\renewcommand{\printSupervisor}{#1}}
+
+\newcommand{\printDate}{}% The date of the defense.
+\newcommand{\myDate}[1]{\renewcommand{\printDate}{#1}}
+
+\myTitle{Road Network Similarity Metrics}
+\myName{Praise Ogunreku}
+\mySupervisor{Prof.~Dr.-Ing.~Martin Kada}
+%information settings------------------------------
+%--------------------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math required package & abbreviations %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Title&configuration/MathP&A}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+
+\frontmatter 
+
+
+\input{Title&configuration/TitlePage} % title page covering
+
+\chapter{Abstract}
+    \input{Contents/Abstract}
+    
+    
+\chapter{Acknowledgements}
+    \input{Contents/Acknowledgements}
+
+
+\tableofcontents
+
+\addcontentsline{toc}{chapter}{List of Symbols}
+    \input{Contents/Symbols}
+
+
+\mainmatter
+
+
+\chapter{Introduction}
+    \input{Contents/Introduction}
+
+    
+\chapter{Related Work}
+    \input{Contents/Related Work}
+    
+    
+\chapter{Methodology}
+    \input{Contents/Methodology}
+    
+
+\chapter{Analysis and Results}
+    \input{Contents/Analysis and Results}
+    
+    
+\chapter{Conclusions}
+    \input{Contents/Conclusions}
+
+
+\chapter{Furthermore}
+    \input{Contents/Furthermore}
+
+
+\appendix
+    \input{Contents/Appendix}
+    
+    
+\printbibliography %Prints bibliography
+    
+
+\end{document}

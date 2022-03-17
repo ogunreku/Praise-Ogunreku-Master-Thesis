@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%
+%% title page %%
+%%%%%%%%%%%%%%%%
+
+%covering------------------------------------------
+%mainly refer to "title_page.tex" in https://www.overleaf.com/latex/templates/hpi-phd-thesis-template/tggbwxzmzvkr
+
+\newgeometry{
+    textwidth = 134 mm,
+    textheight = 220 mm,
+    left = 30 mm,
+    right = 30 mm,
+    }
+    
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[width=.25\textwidth,right]{picture/image1.png}
+            \\
+        \vspace*{0.8cm}
+        {\Huge %title
+            \rule[1 ex]{\textwidth}{2 pt} %upper line for the title
+            \textbf{\printTitle}\\
+            \rule[-1 ex]{\textwidth}{2 pt} %lower line for the title
+            }
+        \vfil
+        {\Large Author:} \\[0.5cm]
+        { %if there are more then one authors, just copy it in needed and add the corresponding newcommand in main.tex
+            {\Large \textbf{\printAuthor}} \\[0.2cm]
+            }
+        \vfil
+        {\Large Supervisor: }\\ [0.5cm]
+        { %if there are more then one supervisors, just copy it in needed and add the corresponding newcommand in main.tex
+            {\Large \textbf{\printSupervisor}} \\[0.2cm]
+        }
+        \vfil
+        {Fakult\"at IV - Planning, Building, Environment \\Institute of Geodesy and Geoinformation Science  \\ Technischen Universit\"at Berlin } \\[2 pt]
+        \vfil
+        {A thesis submitted in fulfillment of the requirements for the degree of \\ Master of Science in Geodesy and Geoinformation Science}
+        \vfil
+        {\large\textbf{30.03.2022} \printDate}
+    \end{center}
+\end{titlepage}
+
+\restoregeometry
+%covering------------------------------------------
+%--------------------------------------------------
+
+
+%the backside of covering--------------------------
+%mainly refer to "ch0-backside.tex" in https://www.overleaf.com/latex/templates/unofficial-la-trobe-university-template/zfbdwvyrxshz
+\hfill
+\vfill
+
+\noindent \textit{\printTitle} 
+%{\textcopyright} {\printDate} 
+
+\bigskip
+
+\noindent Author:\\
+{\printAuthor}
+
+\medskip
+
+\noindent Supervisor:\\
+{\printSupervisor}

@@ -1,0 +1,138 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math required packages & abbreviations %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%list of symbols-----------------------------------
+\usepackage{nomencl}
+\renewcommand{\nomname}{List of Symbols}
+%list of symbols-----------------------------------
+%--------------------------------------------------
+
+
+%math font-----------------------------------------
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm} % bold letter in math mode 
+\usepackage{mathrsfs} % decorated letter
+\usepackage{bbm} % indicative function 1
+\usepackage{extarrows} % http://ctan.org/pkg/extarrows
+%math font-----------------------------------------
+%--------------------------------------------------
+
+
+%theories------------------------------------------
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{cor}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+\numberwithin{equation}{section}
+%theorems------------------------------------------
+%--------------------------------------------------
+
+%some abbreviations--------------------------------
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\JJ}{\mathbb{J}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\renewcommand{\SS}{\mathbb{S}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\UU}{\mathbb{U}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\WW}{\mathbb{W}}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\YY}{\mathbb{Y}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcD}{\mathcal{D}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcI}{\mathcal{I}}
+\newcommand{\mcJ}{\mathcal{J}}
+\newcommand{\mcK}{\mathcal{K}}
+\newcommand{\mcL}{\mathcal{L}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcN}{\mathcal{N}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\mcP}{\mathcal{P}}
+\newcommand{\mcQ}{\mathcal{Q}}
+\newcommand{\mcR}{\mathcal{R}}
+\newcommand{\mcS}{\mathcal{S}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcU}{\mathcal{U}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcX}{\mathcal{X}}
+\newcommand{\mcY}{\mathcal{Y}}
+\newcommand{\mcZ}{\mathcal{Z}}
+
+\newcommand{\mfa}{\mathfrak{a}}
+\newcommand{\mfb}{\mathfrak{b}}
+\newcommand{\mfc}{\mathfrak{c}}
+\newcommand{\mfp}{\mathfrak{p}}
+\newcommand{\mfq}{\mathfrak{q}}
+
+% with high frequency
+
+\newcommand{\indi}[1]{\mathbbm{1}_{#1}} % indicative function 1
+\renewcommand{\l}{\langle} % < bra
+\renewcommand{\r}{\rangle} % > ket
+\newcommand{\bk}[2]{\langle#1, #2\rangle} % <,> bracket, inner prod
+\renewcommand{\d}{\differential}
+\newcommand{\supp}[1]{\operatorname{supp}(#1)}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\p}[1]{\partial_{#1}}
+\newcommand{\LR}[1]{\left(#1\right)} % auto ( )
+\newcommand{\red}[1]{{\color{red}(#1)}} %red notation
+\newcommand{\half}{\frac{1}{2}} % 0.5, 1/2
+
+%Prob
+
+\newcommand{\EEE}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\PPP}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\Cov}[2]{\operatorname{Cov}(#1,#2)}
+\newcommand{\prc}[2]{(#1)_{#2\in\RR^+}}
+\newcommand{\seq}[2]{(#1)_{#2\in\NN}}
+
+%topology
+
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\dist}[2]{\operatorname{d}(#1,#2)}
+
+%algebra
+
+\newcommand{\ord}[1]{\operatorname{order}\left(#1\right)}
+\newcommand{\Vect}{\operatorname{Vect}}
+\newcommand{\Hom}[2]{\operatorname{Hom}(#1,#2)}
+\newcommand{\gcdt}[2]{\operatorname{gcd}(#1,#2)}
+\newcommand{\lcm}[2]{\operatorname{lcm}(#1,#2)}
+%some abbreviations--------------------------------
+%--------------------------------------------------

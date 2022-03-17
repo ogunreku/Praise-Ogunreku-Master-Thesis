@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% global configuration %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%the overline configuration on the pages-----------
+%mainly refer to "packages.tex" in https://www.overleaf.com/latex/templates/tesi-unitn/jjrxgvzgxpsm
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\leftmark} %left page with leftmark of chapter
+\fancyhead[RO]{\rightmark} %right page with rightmark of section
+\fancyfoot[LE,RO]{\thepage} %the position of page number
+%the overline configuration on the pages-----------
+%--------------------------------------------------
+
+
+%clear the empty double page-----------------------
+%refer to https://texfaq.org/FAQ-reallyblank
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+    \clearpage{\pagestyle{empty}\origdoublepage}%
+    }
+\let\cleardoublepage\clearemptydoublepage
+%clear the empty double page-----------------------
+%--------------------------------------------------
+
+
+%make the reference clickable----------------------
+\usepackage{hyperref}
+\hypersetup{  
+    colorlinks=true, 
+    linkcolor=black, 
+    citecolor=red, 
+    urlcolor=blue  
+    }
+%make the reference clickable----------------------
+%--------------------------------------------------
+
+
+%bibliography--------------------------------------
+%refer to https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+    sorting=ynt
+    ]{biblatex}
+\addbibresource{biblitex.bib} %Import the bibliography file
+\usepackage{url} %make the online sites clickable
+%bibliography--------------------------------------
+%--------------------------------------------------
+
+
+%colors&figures------------------------------------
+\usepackage{geometry} % adjust the pages configuration
+\usepackage{graphicx} % insert figures
+\usepackage[export]{adjustbox} % for title page
+\usepackage{xcolor}
+\usepackage{float} %used to place figure with specifier [H]
+%colors&figures------------------------------------
+%--------------------------------------------------
+
+\usepackage{lscape}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{graphicx}
+%others--------------------------------------------
+\usepackage{enumitem} % to use "description" environment
+%others--------------------------------------------
+%--------------------------------------------------
