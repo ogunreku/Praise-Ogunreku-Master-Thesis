@@ -2,11 +2,7 @@
 %% nonofficial template %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[
-    paper=a4,
-    oneside,
-    fontsize=19pt
-    ]{book}
+\documentclass[12pt]{report}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,26 +75,21 @@
 \begin{document}
 
 
-\frontmatter 
-
 
 \input{Title&configuration/TitlePage} % title page covering
 
-\chapter{Abstract}
+\chapter*{Abstract}
     \input{Contents/Abstract}
     
     
-\chapter{Acknowledgements}
+\chapter*{Acknowledgements}
     \input{Contents/Acknowledgements}
 
 
 \tableofcontents
 
-\addcontentsline{toc}{chapter}{List of Symbols}
+\addcontentsline{toc}{chapter}{List of Figures}
     \input{Contents/Symbols}
-
-
-\mainmatter
 
 
 \chapter{Introduction}
@@ -119,10 +110,6 @@
     
 \chapter{Conclusions}
     \input{Contents/Conclusions}
-
-
-\chapter{Furthermore}
-    \input{Contents/Furthermore}
 
 
 \appendix
