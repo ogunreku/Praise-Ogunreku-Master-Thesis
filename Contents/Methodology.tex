@@ -112,34 +112,32 @@ based on the two criteria mentioned above. Each of these 10 metrics is briefly d
 
 \subsection{Shortest Path Kernel}
 
-According to [Karsten M. Borgwardt and Hans-Peter Kriegel. Shortest-path kernels on graphs. In Proceedings of the 5th International Conference on Data Mining, 74–81. 2005.], the shortest-path kernel decomposes graphs into shortest paths and compares pairs of shortest paths according to their lengths and the labels of their endpoints. The first step of the shortest-path kernel is to transform the input graphs into shortest-paths graphs. Given an input graph , a new graph  (i.e. its shortest-path graph) is created. The shortest-path graph  contains the same set of vertices as the graph from which it originates. The edge set of the former is a superset of that of the latter, since in the shortest-path graph , there exists an edge between all vertices which are connected by a walk in the original graph . To complete the transformation, labels are assigned to all the edges of the shortest-path graph . The label of each edge is set equal to the shortest distance between its endpoints in the original graph .
+According to [Karsten M. Borgwardt and Hans-Peter Kriegel. Shortest-path kernels on graphs. In Proceedings of the 5th International Conference on Data Mining, 74–81. 2005.], the shortest-path kernel decomposes graphs into shortest paths and compares pairs of shortest paths consistent with their lengths and also the labels of their endpoints. The first step of the shortest-path kernel is to transform the input graphs into shortest-paths graphs. Given an input graph , a new graph  (i.e. its shortest-path graph) is created. The shortest-path graph  contains the same set of vertices as the graph from which it originates. The edge set of the former is a superset of that of the latter, since in the shortest-path graph , there exists an edge between all vertices which are connected by a walk within the original graph . To complete the transformation, labels are assigned to all the edges of the shortest-path graph . The label of each edge is set equal to the shortest distance between its endpoints within the original graph .
 
-Given the above procedure for transforming a graph into a shortest-path graph, the shortest-path kernel is defined as follows.
+Given the above procedure for transforming a graph into a shortest-path graph, the shortest-path kernel is defined as follows:
 
-Let Gi, Gj be two graphs, with Si, Sj be their corresponding shortest-path graphs.
+Using [Karsten] approoch as illustrated in equation's 3.4.1 and 3.4.2, let Gi, Gj be two graphs and Si, Sj as their shortest-path graphs. The shortest-path kernel is then defined on Si  = (Vi, Ei) and Si = (Vj, Ej) as:
 
-The shortest-path kernel is then defined on Si  = (Vi, Ei) and Si = (Vj, Ej) as
-
-$$
+\begin{equation}
 k\left(S_{i}, S_{j}\right)=\sum_{e_{i} \in E_{i}} \sum_{e_{j} \in E_{j}} k_{w a l k}^{(1)}\left(e_{i}, e_{j}\right)
-$$
+\end{equation}
 
 where $k_{w a l k}^{(1)}\left(e_{i}, e_{j}\right)$ is a positive semidefinite kernel on edge walks of length $1 .$
 
-In labeled graphs, the $k_{\text {walk }}^{(1)}\left(e_{i}, e_{j}\right)$ kernel is designed to compare both the lengths of the shortest paths corresponding to edges $e_{i}$ and $e_{j}$, and the labels of their endpoint vertices.
+The $k_{\text {walk }}^{(1)}\left(e_{i}, e_{j}\right)$ kernel in labeled graphs is designed to compare both the lengths of the shortest paths corresponding to edges $e_{i}$ and $e_{j}$, as well as the labels of their endpoint vertices.
 
 Let $e_{i}=\left\{v_{i}, u_{i}\right\}$ and $e_{j}=\left\{v_{j}, u_{j}\right\}$. Then, $k_{\text {walk }}^{(1)}\left(e_{i}, e_{j}\right)$ is usually defined as:
 
-$$
+\begin{equation}
 \begin{aligned}
 k_{\text {walk }}^{(1)}\left(e_{i}, e_{j}\right) &=k_{v}\left(\ell\left(v_{i}\right), \ell\left(v_{j}\right)\right) k_{e}\left(\ell\left(e_{i}\right), \ell\left(e_{j}\right)\right) k_{v}\left(\ell\left(u_{i}\right), \ell\left(u_{j}\right)\right) \\
 &+k_{v}\left(\ell\left(v_{i}\right), \ell\left(u_{j}\right)\right) k_{e}\left(\ell\left(e_{i}\right), \ell\left(e_{j}\right)\right) k_{v}\left(\ell\left(u_{i}\right), \ell\left(v_{j}\right)\right)
 \end{aligned}
-$$
+\end{equation}
 
-where $k_{v}$ is a kernel comparing vertex labels, and $k_{e}$ a kernel comparing shortest path lengths. Vertex labels are usually compared via a dirac kernel, while shortest path lengths may also be compared via a dirac kernel or, more rarely, via a brownian bridge kernel [BК05].
+$k_{v}$ is the kernel that compares vertex labels, while $k_{e}$ is the kernel that compares shortest path lengths. Vertex labels are typically compared using a dirac kernel, while shortest path lengths are compared using a dirac kernel or, less frequently, using a a brownian bridge kernel [Karsten].
 
-In terms of runtime complexity, the shortest-path kernel is very expensive since its computation takes $\mathcal{O}\left(n^{4}\right)$ time.
+In terms of runtime complexity, the shortest-path kernel is very expensive because it takes $\mathcal{O}\left(n^{4}\right)$ computation time.
 
 \subsection{Random Walk Kernel}
 The most well-studied family of graph kernels is probably the random walk kernels which quantify the similarity between a pair of graphs based on the number of common walks in the two graphs [KTI03], [GartnerFW03], [MaheUA+04], [BOSchonauer+05], [VSKB10], [SB15].
