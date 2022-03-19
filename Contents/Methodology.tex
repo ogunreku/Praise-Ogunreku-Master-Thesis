@@ -15,6 +15,9 @@ This study builds on a rich body of road and graph network research by analyzing
 \subsection{Python}
 The coding implementation will be fully done in the Python3 programming language. In addition, open source libraries based on python will be extensively used for this thesis project.
 
+\subsection{NetworkX}
+NetworkX is a Python package that allows you to create, manipulate, and investigate the structure, dynamics, and functions of complex networks.[Aric A. Hagberg, Daniel A. Schult and Pieter J. Swart, “Exploring network structure, dynamics, and function using NetworkX”, in Proceedings of the 7th Python in Science Conference (SciPy2008), Gäel Varoquaux, Travis Vaught, and Jarrod Millman (Eds), (Pasadena, CA USA), pp. 11–15, Aug 2008]
+
 \subsection{OSMnx}
 OSMnx is a free, open-source, Python-based toolkit to automatically download spatial data (including municipal boundaries and streets) from OpenStreetMap (OSM) and construct graph-theoretic objects for network analysis (Boeing, 2017). It differentiates between walkable and drivable routes based on individual elements’ metadata that describe how the route may be used. Thus the walkable network may contain surface streets, paths through parks, pedestrian flyovers, passageways between buildings, and other walkable paths. The drivable network may contain surface streets, grade-separated freeways, and other drivable routes. OSMnx is built on top of Python's NetworkX, matplotlib, and geopandas libraries for rich network analytic capabilities, beautiful and simple visualizations, and fast spatial queries with R-tree indexing.
 
@@ -23,6 +26,9 @@ Scikit-learn is a free and open source machine learning library that can perform
 
 \subsection{Scipy}
 SciPy is a free and open-source Python library for scientific and technical computing. [Pauli Virtanen; Ralf Gommers; Travis E. Oliphant; et al. (3 February 2020). "SciPy 1.0: fundamental algorithms for scientific computing in Python" (PDF). Nature Methods. 17 (3): 261–272. doi:10.1038/S41592-019-0686-2. ISSN 1548-7091. PMC 7056644. PMID 32015543. Wikidata Q84573952.] SciPy includes modules for optimization, linear algebra, integration, interpolation, special functions, FFT, signal and image processing, ODE solvers, and other tasks common in science and engineering.
+
+\subsection{Grakel}
+GraKeL is a Python package that contains implementations of several graph kernels, a class of powerful methods that allow kernel-based learning approaches like SVMs to work directly on graphs.[Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]
 
 \section{Data}
 \begin{figure}[h!]
@@ -121,6 +127,7 @@ Using [Karsten] approoch as illustrated in equation's 3.4.1 and 3.4.2, let Gi, G
 \begin{equation}
 k\left(S_{i}, S_{j}\right)=\sum_{e_{i} \in E_{i}} \sum_{e_{j} \in E_{j}} k_{w a l k}^{(1)}\left(e_{i}, e_{j}\right)
 \end{equation}
+\caption{Source: [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]}
 
 where $k_{w a l k}^{(1)}\left(e_{i}, e_{j}\right)$ is a positive semidefinite kernel on edge walks of length $1 .$
 
@@ -134,107 +141,121 @@ k_{\text {walk }}^{(1)}\left(e_{i}, e_{j}\right) &=k_{v}\left(\ell\left(v_{i}\ri
 &+k_{v}\left(\ell\left(v_{i}\right), \ell\left(u_{j}\right)\right) k_{e}\left(\ell\left(e_{i}\right), \ell\left(e_{j}\right)\right) k_{v}\left(\ell\left(u_{i}\right), \ell\left(v_{j}\right)\right)
 \end{aligned}
 \end{equation}
+\caption{Source: [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]}
 
 $k_{v}$ is the kernel that compares vertex labels, while $k_{e}$ is the kernel that compares shortest path lengths. Vertex labels are typically compared using a dirac kernel, while shortest path lengths are compared using a dirac kernel or, less frequently, using a a brownian bridge kernel [Karsten].
 
-In terms of runtime complexity, the shortest-path kernel is very expensive because it takes $\mathcal{O}\left(n^{4}\right)$ computation time.
+In terms of runtime complexity, the shortest-path kernel is very expensive because it takes $\mathcal{O}\left(n^{4}\right)$ computation time. [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]
 
 \subsection{Random Walk Kernel}
-The most well-studied family of graph kernels is probably the random walk kernels which quantify the similarity between a pair of graphs based on the number of common walks in the two graphs [KTI03], [GartnerFW03], [MaheUA+04], [BOSchonauer+05], [VSKB10], [SB15].
+The random walk kernels are probably the most well-studied family of graph kernels, which quantify the similarity between two graphs based on the number of common walks in the two graphs [Hisashi Kashima, Koji Tsuda, and Akihiro Inokuchi. Marginalized Kernels Between Labeled Graphs. In Proceedings of the 20th Conference in Machine Learning, 321–328. 2003.], [Thomas Gärtner, Peter Flach, and Stefan Wrobel. On Graph Kernels: Hardness Results and Efficient Alternatives. In Learning Theory and Kernel Machines, 129–143. 2003.], [Pierre Mahé, Nobuhisa Ueda, Tatsuya Akutsu, Jean-Luc Perret, and Jean-Philippe Vert. Extensions of marginalized graph kernels. In Proceedings of the 21st International Conference on Machine Learning, 70. 2004.], [Karsten M. Borgwardt, Cheng Soon Ong, Stefan Schönauer, S.V.N. Vishwanathan, Alex J. Smola, and Hans-Peter Kriegel. Protein function prediction via graph kernels. Bioinformatics, 21(suppl 1):i47–i56, 2005.], [S.V.N. Vishwanathan, Nicol N. Schraudolph, Risi Kondor, and Karsten M. Borgwardt. Graph Kernels. The Journal of Machine Learning Research, 11:1201–1242, 2010.], [Mahito Sugiyama and Karsten M. Borgwardt. Halting in Random Walk Kernels. In Advances in Neural Information Processing Systems, 1639–1647. 2015.].
 
-Kernels belonging to this family have concentrated mainly on counting matching walks in the two input graphs. There are several variations of random walk kernels. The -step random walk kernel compares random walks up to length  in the two graphs. The most widely-used kernel from this family is the geometric random walk kernel [GartnerFW03] which compares walks up to infinity assigning a weight  () to walks of length  in order to ensure convergence of the corresponding geometric series. We next give the formal definition of the geometric random walk kernel. Given two node-labeled graphs  and  , their direct product is a graph with vertex set:
+This family of kernels has focused primarily on counting matching walks in the two input graphs. Random walk kernels come in several variations. The $k$ step random walk kernel compares random walks in the two graphs up to length.  The geometric random walk kernel [GartnerFW03] is the most widely used kernel in this family, comparing walks up to infinity and assigning a weight $\lambda^{k}(\lambda<1)$ to walks of length $k$ to ensure convergence of the corresponding geometric series. Following that, a formal definition of the geometric random walk kernel is defined below. 
 
-assigning a weight $\lambda^{k}(\lambda<1)$ to walks of length $k$ in order to ensure convergence of the corresponding geometric series. We next give the formal definition of the geometric random walk kernel. Given two node-labeled graphs $G_{i}=\left(V_{i}, E_{i}\right)$ and $G_{j}=\left(V_{j}, E_{j}\right)$, their direct product $\boldsymbol{G}_{\times}=\left(V_{\times}, \boldsymbol{E}_{\times}\right)$is a graph with vertex set:
+Given two node-labeled graphs $G_{i}=\left(V_{i}, E_{i}\right)$  and $G_{j}=\left(V_{j}, E_{j}\right)$ , their direct product $\boldsymbol{G}_{\times}=\left(V_{\times}, \boldsymbol{E}_{\times}\right)$ is a graph with vertex set:
 
-$$
-V_{\times}=\left\{\left(v_{i}, v_{j}\right): v_{i} \in V_{i} \wedge v_{j} \in V_{j} \wedge \ell\left(v_{i}\right)=\ell\left(v_{j}\right)\right\}
-$$
+\begin{equation}
+V_{\times}=\left\{\left(v_{i}, v_{j}\right): v_{i} \in V_{i} \wedge v_{j} \in V_{j} \wedge \ell\left(v_{i}\right)=\ell\left(v_{j}\right)\right\}   
+\end{equation}
+\caption{Source: [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]}
 
 and edge set:
 
-$$
-E_{\times}=\left\{\left\{\left(v_{i}, v_{j}\right),\left(u_{i}, u_{j}\right)\right\}:\left\{v_{i}, u_{i}\right\} \in E_{i} \wedge\left\{v_{j}, u_{j}\right\} \in E_{j}\right\}
-$$
+\begin{equation}
+E_{\times}=\left\{\left\{\left(v_{i}, v_{j}\right),\left(u_{i}, u_{j}\right)\right\}:\left\{v_{i}, u_{i}\right\} \in E_{i} \wedge\left\{v_{j}, u_{j}\right\} \in E_{j}\right\} 
+\end{equation}
+\caption{Source: [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]}
 
-Performing a random walk on $G_{\times}$is equivalent to performing a simultaneous random walk on $G_{i}$ and $G_{j}$. The geometric random walk kernel counts common walks (of potentially infinite length) in two graphs and is defined as follows.
+A random walk on $G_{\times}$ is equivalent to performing a simultaneous random walk on both $G_{i}$ and $G_{j}$. As the geometric random walk kernel counts the common walks (of potentially infinite length) in the two graphs, it can therefor be defined as follows.
 
-{Definition: Geometric Random Walk Kernel}
+\subsubsection{Definition: Geometric Random Walk Kernel}
 
-Let $G_{i}$ and $G_{j}$ be two graphs, let $A_{\times}$denote the adjacency matrix of their product graph $G_{\times}$, and let $V_{\times}$denote the vertex set of the product graph $G_{\times}$.
+According to [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ], Let $G_{i}$ and $G_{j}$ be two graphs, with $A_{\times}$denoting the adjacency matrix of their product graph $G_{\times}$ and $V_{\times}$ denoting the product graph's vertex set $G_{\times}$.
 
-Then, the geometric random walk kernel is defined as
+Then, the geometric random walk kernel is defined as:
 
-$$
-K_{\times}^{\infty}\left(G_{i}, G_{j}\right)=\sum_{p, q=1}^{\left|V_{\times}\right|}\left[\sum_{l=0}^{\infty} \lambda^{l} A_{\times}^{l}\right]_{p q}=e^{T}\left(I-\lambda A_{\times}\right)^{-1} e
-$$
+\begin{equation}
+K_{\times}^{\infty}\left(G_{i}, G_{j}\right)=\sum_{p, q=1}^{\left|V_{\times}\right|}\left[\sum_{l=0}^{\infty} \lambda^{l} A_{\times}^{l}\right]_{p q}=e^{T}\left(I-\lambda A_{\times}\right)^{-1} e  
+\end{equation}
+\caption{Source: [Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]}
 
-where $I$ is the identity matrix, $e$ is the all-ones vector, and $\lambda$ is a positive, real-valued weight. The geometric random walk kernel converges only if $\lambda<\frac{1}{\lambda_{\times}}$where $\lambda_{\times}$is the largest eigenvalue of $A_{\times}$.
+where $I$ represents the identity matrix, $e$ represents the all-ones vector, and $\lambda$ is a positive, real-valued weight. Only if $\lambda<\frac{1}{\lambda_{\times}}$where $\lambda_{\times}$is the largest eigenvalue of $A_{\times}$ does the geometric random walk kernel converge.
 
-Direct computation of the geometric random walk kernel requires $\mathcal{O}\left(n^{6}\right)$ time. The computational complexity of the method severely limits its applicability to real-world applications. To account for this, Vishwanathan et al. proposed in [VSKB10] four efficient methods to compute random walk graph kernels which generally reduce the computational complexity from $\mathcal{O}\left(n^{6}\right)$ to $\mathcal{O}\left(n^{3}\right)$. Mahé et al. proposed in [MaheUA+04] some other extensions of random walk kernels. Specifically, they proposed a label enrichment approach which increases specificity and in most cases also reduces computational complexity. They also employed a second order Markov random walk to deal with the problem of "tottering". Sugiyama and Borgwardt focused in [SB15] on a different problem of random walk kernels, a phenomenon referred to as "halting".
+In terms of runtime complexity, the direct computation of the geometric random walk kernel requires $\mathcal{O}\left(n^{6}\right)$ time. Because of its computational complexity, the method's applicability to real-world applications is severely limited. To address this problem, Vishwanathan et al. in their work proposed four efficient methods to compute random walk graph kernels which generally reduce the computational complexity from $\mathcal{O}\left(n^{6}\right)$ to $\mathcal{O}\left(n^{3}\right)$. Other random walk kernel extensions proposed by Mahé et al. in [MaheUA+04] They specifically proposed a label enrichment approach that increases specificity while decreasing computational complexity in the majority of cases. To deal with the problem of "tottering," they also used a second order Markov random walk. In [SB15], Sugiyama and Borgwardt concentrated on a different random walk kernel problem, a phenomenon known as "halting."
 
 
-\subsection{NetLSD}
-The NetLSD distance LSD between two graphs, $G$ and $G^{\prime}$, is the Frobenius norm between the heat trace signatures of the normalized Laplacians $\mathbf{L}$ and $\mathbf{L}^{\prime}[3]$. The heat kernel matrix is calculated as
+\subsection{Network Laplacian Spectral Descriptor (NetLSD)}
+NetLSD is a permutation- and size-invariant, scale-adaptive, and efficiently computable graph representation method that allows for straightforward comparisons of large graphs.NetLSD creates a compact signature that inherits the Laplacian spectrum's formal properties, particularly its heat or wave kernel, and thus hears the shape of a graph.  [Anton Tsitsulin, Davide Mottin, 2018]
 
-$$
+The NetLSD distance LSD between two graphs, $G$ and $G^{\prime}$, is the Frobenius norm between the heat trace signatures of the normalized Laplacians $\mathbf{L}$ and $\mathbf{L}^{\prime}$[Hartle, A.Tsitsulin]. The heat kernel matrix is calculated as
+
+\begin{equation}
 H_{t}=e^{-t \mathbf{L}}=\sum_{j=1}^{n} e^{-t \lambda_{j}} \phi_{j} \phi_{j}^{T}
-$$
+\end{equation}
+\caption{Source: [A.Tsitsulin]}
 
-The $i j$-th element of $H_{t}$ contains the amount of heat transferred from node $v_{i}$ to node $v_{j}$ at time $t$ (default of 256 log-spaced time intervals between $10^{-2}$ and $10^{2}$ ). From the heat kernel matrix $H_{t}$, the heat trace, $h_{t}$ is defined as
+The amount of heat transferred from node $v_{i}$ to node $v_{j}$ at time $t$ (default of 256 log-spaced time intervals between 10 2 and 102) is stored in the $i j$-th element of $H_{t}$.[A.Tsitsulin] The heat trace $h_{t}$ from the heat kernel matrix $H_{t}$ is defined as:
 
-$$
-h_{t}=\operatorname{Tr}\left(H_{t}\right)=\sum_{j=1}^{n} e^{-t \lambda_{f}}
-$$
+\begin{equation}
+h_{t}=\operatorname{Tr}\left(H_{t}\right)=\sum_{j=1}^{n} e^{-t \lambda_{f}}  
+\end{equation}
+\caption{Source: [A.Tsitsulin]}
 
-The heat trace signature of graph $G$ is the set $\left\{h_{t}\right\}_{t \geq 1}$. Upon computing heat trace signatures of both $G$ and $\bar{G}^{\prime}$, they are compared via a Frobenius norm
+The set $\left\{h_{t}\right\}_{t \geq 1}$ is the heat trace signature of graph $G$. The heat trace signatures of both $G$ and $\bar{G}^{\prime}$ are first computed and then compared using a Frobenius norm.
 
-$$
-D_{\mathrm{LSD}}\left(G, G^{\prime}\right)=d_{\mathrm{FRO}}\left(\left\{h_{t}\right\}_{t \geq 0},\left\{h_{t}^{\prime}\right\}_{t \geq 0}\right) .
-$$
+\begin{equation}
+D_{\mathrm{LSD}}\left(G, G^{\prime}\right)=d_{\mathrm{FRO}}\left(\left\{h_{t}\right\}_{t \geq 0},\left\{h_{t}^{\prime}\right\}_{t \geq 0}\right)
+\end{equation}
+\caption{Source: [A.Tsitsulin]}
 
-The computational complexity of LSD is $O\left(n^{3}\right)$ due to the spectral decomposition of the Laplacian matrices of both graphs (see Appendix B 4).
+In terms of runtime complexity, the computational complexity of LSD is $O\left(n^{3}\right)$ because of the spectral decomposition of both graphs' Laplacian matrices.
 
 \subsection{Degree Divergence}
-A simple graph distance measure is the JensenShannon divergence [54] between the empirical degree distributions of two graphs. In this case for an $n$-node graph $G$ the descriptor $\psi_{G}$ is the empirical degree distribution encoded in the set of numbers $\left\{p_{k}(G)\right\}_{k \geq 0}:=\mathbf{p}$ given by $p_{k}(G):=n_{k}(G) / n$, where $n_{k}(G)=\sum_{i=1}^{n} 1\left\{k_{i}=\right.$ $k\}$, with $1\{-\}$ being the indicator function and $k_{i}=$ $\sum_{j=1}^{n} A_{i j}$ being the degree of node $i$ in terms of the adjacency matrix A of $G$. The Jensen-Shannon divergence between two such distributions $[34]$ is the degree JensenShannon divergence or DJS distance between the graphs:
+The degree divergence also known as the degree distribution Jensen-Shannon divergence [J. Lin, IEEE Transactions on Information Theory 37, 145 (1991).] is the graph distance measure between the empirical degree distributions of two graphs. The descriptor $\psi_{G}$ is the empirical degree distribution encoded in the set of numbers $\left\{p_{k}(G)\right\}_{k \geq 0}:=\mathbf{p}$ given by $p_{k}(G):=n_{k}(G) /n$ for a $n$-node graph $G$, where $n_{k}(G)=\sum_{i=1}^{n} 1\left\{k_{i}=\right.$ $k\}$. $k_{i}=$ $\sum_{j=1}^{n} A_{i j}$ is the degree of node $i$ in terms of the adjacency matrix A of $G$, with $1\{-\}$ being the indicator function.  The Jensen-Shannon divergence between two such distributions [L. C. Carpi, O. A. Rosso, P. M. Saco, and M. G. Ravetti, Physics Letters A 375, 801 (2011).] is the degree JensenShannon divergence or DJS distance between the graphs [A.Tsitsulin]:
 
-$$
+\begin{equation}
 D_{\text {DJs }}\left(G, G^{\prime}\right)=H\left[\mathbf{p}_{+}\right]-\frac{1}{2}\left(H[\mathbf{p}]+H\left[\mathbf{p}^{\prime}\right]\right)
-$$
+\end{equation}
+\caption{Source: [A.Tsitsulin]}
 
-where $\mathbf{P}_{+}=\left\{\left(p_{k}+p_{k}^{\prime}\right) / 2\right\}_{k \geq 0}$ is a mixture distribution and $H[\mathbf{p}]=-\sum_{k} p_{k} \ln p_{k}$ is the Shannon entropy. The computational complexity of DJS is $O(n)$, which arises from computing two degree distributions (which is $O(n)$ ) and then comparing them (which is $O\left(k_{+}\right)$, with $k_{+}<n$ being the maximum degree in either network).
+where $\mathbf{P}_{+}=\left\{\left(p_{k}+p_{k}^{\prime}\right) / 2\right\}_{k \geq 0}$ denotes a mixture distribution, and $H[\mathbf{p}]=-\sum_{k} p_{k} \ln p_{k}$ denotes the Shannon entropy. 
 
-\subsection{Laplacian Spectra}
-the methods below, we use the eigenvalues $\left\{\lambda_{1}=0 \leq\right.$ $\left.\lambda_{2} \leq \cdots \leq \lambda_{n}\right\}$ of the normalized Laplacian matrices $\mathbf{L}$ and $\mathbf{L}^{\prime}$. To perform the comparison, a subset of the whole spectrum can be used, e.g. the $k$ smallest [61] or largest $[6,27]$ in magnitude. Unless specified, we used all eigenvalues for comparison $(k=n)$.
+In terms of runtime complexity, the computational complexity of DJS is $O(n)$, which results from computing two degree distributions (which is $O(n)$ ) and then comparing them (which is $O\left(k_{+}\right)$, with $k_{+}<n$ being the maximum degree in either network)[A.Tsitsulin].
+
+\subsection{Laplacian Spectrum Distances}
+Laplacian Spectrum distance is the graph distance measure between the Laplacian spectra of $G1$ and ${G2}$. The spectra of both Laplacian matrices (normalized or not) is computed. Then, the discrete spectra are convolved with a kernel to produce continuous ones. Finally, these distribution are compared using a metric. The results dictionary also stores a 2-tuple of the underlying adjacency matrices in the key $adjacency_matrices$, the Laplacian matrices in $laplacian_matrices$, the eigenvalues of the Laplacians in ‘eigenvalues’. If the networks being compared are directed, the augmented adjacency matrices are calculated and stored in $augmented_adjacency_matrices$.
+
+Many distances between two graphs, $\rho(\lambda)$ and $\rho^{\prime}(\lambda)$, use a direct comparison of their Laplacian spectrum. For all the methods below, we use the eigenvalues $\left\{\lambda_{1}=0 \leq\right.$ $\left.\lambda_{2} \leq \cdots \leq \lambda_{n}\right\}$ of the normalized Laplacian matrices $\mathbf{L}$ and $\mathbf{L}^{\prime}$. To perform the comparison, a subset of the whole spectrum can be used, e.g. the $k$ smallest [61] or largest $[6,27]$ in magnitude. Unless specified, we used all eigenvalues for comparison $(k=n)$.
 
 The distances compare the continuous spectra $\rho(\lambda)$ and $\rho^{\prime}(\lambda)$ associated with the graph $G$ and $G^{\prime}$. A continuous spectrum is obtained by the convolution of the discrete spectrum $\sum_{i} \delta\left(\lambda-\lambda_{i}\right)$ with a kernel $g\left(\lambda, \lambda^{*}\right)$
 
-$$
+\begin{equation}
 \rho(\lambda)=\frac{1}{Z} \sum_{i=1}^{n} \int_{0}^{2} g\left(\lambda, \lambda^{*}\right) \delta\left(\lambda^{*}-\lambda_{i}\right) \mathrm{d} \lambda^{*},
-$$
+\end{equation}
 
 where $Z$ is a normalization factor. Different types of distribution can be used for the kernel, for instance a Lorentzian distribution [43]
 
-$$
+\begin{equation}
 g\left(\lambda, \lambda^{*}\right)=\frac{\gamma}{\pi\left[\gamma^{2}+\left(\lambda-\lambda^{*}\right)^{2}\right]},
-$$
+\end{equation}
 
 or a Normal distribution
 
-$$
+\begin{equation}
 g\left(\lambda, \lambda^{*}\right)=\frac{\exp \left[-\left(\lambda-\lambda^{*}\right)^{2} / 2 \sigma^{2}\right]}{\sqrt{2 \pi \sigma^{2}}} .
-$$
+\end{equation}
 
 Different types of metrics can then be used to compare the spectra, such as the Euclidean metric
 
-$$
+\begin{equation}
 d\left(\rho, \rho^{\prime}\right)=\sqrt{\int_{0}^{2}\left[\rho(\lambda)-\rho^{\prime}(\lambda)\right]^{2} \mathrm{~d} \lambda},
-$$
+\end{equation}
 
 or the square root of the $\operatorname{JSD} d\left(\rho, \rho^{\prime}\right)=\sqrt{J S D\left(\rho, \rho^{\prime}\right)}$, written as
 
-$$
+\begin{equation}
 J S D\left(\rho, \rho^{\prime}\right)=\frac{1}{2} D_{K L}(\rho \| \bar{\rho})+\frac{1}{2} D_{K L}\left(\rho^{\prime} \| \bar{\rho}\right)
-$$
+\end{equation}
 
 where $\bar{\rho}=\left(\rho+\rho^{\prime}\right) / 2$. Various combination of kernels and metrics yield the following distinct distance measures:
 
@@ -265,9 +286,9 @@ NetSimile NES is a method for comparing two graphs, $G$ and $G^{\prime}$, that i
 
 These features are then summarized into $\mathbf{p}$ and $\mathbf{p}^{\prime}$, which are $7 \times 5$ signature vectors consisting of the median,mean, standard deviation, skewness, and kurtosis of each feature. NetSimile uses the Canberra distance to arrive at a final scalar distance.
 
-$$
+\begin{equation}
 D_{\mathrm{KSE}}\left(G, G^{\prime}\right)=d\left(\mathbf{p}, \mathbf{p}^{\prime}\right)=\sum_{i=1}^{n} \frac{\left|p_{i}-p_{i}^{\prime}\right|}{\left|p_{i}\right|+\left|p_{i}^{\prime}\right|}
-$$
+\end{equation}
 
 The computational complexity of NES depends on two parts : features extraction and features aggregation. Features are all locally defined, hence their extraction will take $O(q n)$ where $q$ is the average degree of a node when selecting a random edge and choosing an endpoint [63]. Feature aggregation is $O(n \ln n)[1]$, hence the overall complexity is $O(q n+n \log n)$.
 
@@ -275,11 +296,15 @@ The computational complexity of NES depends on two parts : features extraction a
 Originally used in text mining for document comparison, the cosine similarity computes the angle between the document vectors, without taking into account their lengths. It assigns higher similarity to vectors that point roughly in the same direction. 
 Returns: the cosine similarity values in [-1, 1]. the cosine similarity values are converted to a similarity measure in the range [0, 1]. According to literature, the most prevalent ways of deriving the similarity measure are the following:
 
-According to literature, the most prevalent ways of deriving the similarity measure are the following: 
-- $s=1-d$
-- $s=\frac{1}{d}$
-- $s=\frac{1}{1+d}$ for unbounded $d$
-$s=e^{-d^{2}}$
+According to literature, the most prevalent ways of deriving the similarity measure are the following:
+
+1. $s=1-d$
+
+2. $s=\frac{1}{d}$
+
+3. $s=\frac{1}{1+d}$ for unbounded $d$
+
+4. $s=e^{-d^{2}}$
 
 \subsection{Euclidean Distance}
 Based on the Euclidean distance measurement approach, the euclidean based similarity  is a normalized euclidean similarity measure that calculates the shortest distance between 2 points irrespective of their dimensions.  Returns: the calculated distance (d) converted to a similarity measure (s) in the range [0, 1].
@@ -302,9 +327,9 @@ Returns: distances : ndarray of shape (n_samples_X, n_samples_Y) Returns the dis
 \subsection{Jaccard Distance}
 The Jaccard measure is computed using the adjacency matrix $\psi_{G}=\mathbf{A} \in\{0,1\}^{n \times n}$. For two graphs vertexlabeled $G$ and $G^{\prime}$,
 
-$$
+\begin{equation}
 D_{\mathrm{JAC}}\left(G, G^{\prime}\right)=d_{\mathrm{JAC}}\left(\mathbf{A}, \mathbf{A}^{\prime}\right)=1-\frac{|\mathbf{S}|}{|\mathbf{T}|}
-$$
+\end{equation}
 
 where $S_{i j}=A_{i j} A_{i j}^{\prime}$ represents the intersection of edge sets between graphs $G$ and $G^{\prime}$, while $T_{i j}=S_{i j}+(1-$ $\left.A_{i j}^{\prime}\right) A_{i j}+\left(1-A_{i j}\right) A_{i j}^{\prime}$ represents the union of edge sets between graphs. Here, $|\mathbf{S}|$ is the sum over the $S_{i j}$ and similarly for $|\mathbf{T}|$. The computational complexity of the Jaccard distance is $O\left(|E|+\left|E^{\prime}\right|\right)$ when using unordered sets to get the union and intersection sets and their cardinality. This is what is done in the netrd package [51]. Since nearly empty graphs likely have nearly zero edges in common, the $|\mathbf{S}||\mathbf{T}|$ will be nearly zero for $p$ close to 0 , so that $d_{J A C}$ approaches 1 at low $p$.
 
