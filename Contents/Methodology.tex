@@ -30,6 +30,10 @@ SciPy is a free and open-source Python library for scientific and technical comp
 \subsection{Grakel}
 GraKeL is a Python package that contains implementations of several graph kernels, a class of powerful methods that allow kernel-based learning approaches like SVMs to work directly on graphs.[Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]
 
+\subsection{netrd}
+netrd is a NetworkX-based library that provides a consistent interface to various utilities for graph distances, graph reconstruction from time series data, and network simulation dynamics.[S. McCabe]
+
+
 \section{Data}
 \begin{figure}[h!]
 \centering
@@ -101,8 +105,20 @@ City of Westminster, London     & UK          & Tree         & Europe        & 6
 \end{figure}
 
 \section{Road Network Similarity Metrics}
-All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? For the first criteria 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level.  For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. For the Vector-based metrics, feature vectors F1 and F2 are assigned to each network G1 and G2, respectively. They define the similarity between G1 and G2 as 1 − Canberra(F1, F2) [13].2 For the Classifier-based metric,  a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). For each of these structures, a feature vector is calculated describing its structural properties (e.g., the number of edges within a node neighborhood); and the feature vectors are thereby labeled with the name of their respective network. Cross-validation is then used afterward to determine whether an SVM can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. In each round of cross-validation, the test set contains feature vectors from G1 and G2; and so for each of G1 and G2, they create a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. They define the similarity between G1 and G2 as 1−Canberra(F1, F2). If G1 and G2 have very similar local structures, then we expect that SVM will not be able to distinguish between the two classes of feature vectors, and F1 and F2 will be very similar. The distance between F1 and F2 will be very low, and so the similarity will be high. Conversely, if G1 and G2 have very different structures, then the SVM will have high classification accuracy and a low similarity score. For the matching-based metric, see () which goes into detail how this approach is described and can be applied. Table 3.2 categorizes all road network-similarity metrics
-based on the two criteria mentioned above. Each of these 10 metrics is briefly described below. Based on previous studies and research (), because macro-level metrics consider the entire network at once, rather than local sub-structures, it is not possible for such metrics to be classifier- or matching-based.
+All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? 
+
+For the first criteria 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level[Soundarajan].
+
+
+For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. 
+
+For the Vector-based metrics, feature vectors F1 and F2 are assigned to each network G1 and G2, respectively. They define the similarity between G1 and G2 as $1&-Canberra(F1, F2)$ [richards].
+
+For the Classifier-based metric,  a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). FA feature vector describing the structural properties of each of these structures (e.g., the number of edges within a node neighborhood) is calculated for each of these structures, and the feature vectors are then labeled with the name of their respective network.[Soundarajan] Cross-validation is then used afterward to determine if a Support vector machine (SVM) can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. The test set in each round of cross-validation contains feature vectors from G1 and G2; resulting in a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. The similarity between G1 and G2 is defined as $1&-Canberra(F1, F2)$. The SVM will be unable to distinguish between the two classes of feature vectors if G1 and G2 have very similar local structures, and F1 and F2 will be very similar. The distance between F1 and F2 will be very short, resulting in a high degree of similarity. If G1 and G2 have drastically different structures, the SVM will have a high classification accuracy but a low similarity score.
+
+For the matching-based metric, see [Soundarajan] which goes into detail how this approach is described and can be applied. 
+
+Table 3.2 categorizes all road network-similarity metrics based on the two criteria mentioned above. Each of these 10 metrics is briefly described below. Based on previous studies and research [Soundarajan], because macro-level metrics consider the entire network at once, rather than local sub-structures, it is not possible for such metrics to be classifier- or matching-based.
 
 \begin{table}[!h]
 \centering
@@ -220,55 +236,15 @@ D_{\text {DJs }}\left(G, G^{\prime}\right)=H\left[\mathbf{p}_{+}\right]-\frac{1}
 
 where $\mathbf{P}_{+}=\left\{\left(p_{k}+p_{k}^{\prime}\right) / 2\right\}_{k \geq 0}$ denotes a mixture distribution, and $H[\mathbf{p}]=-\sum_{k} p_{k} \ln p_{k}$ denotes the Shannon entropy. 
 
-In terms of runtime complexity, the computational complexity of DJS is $O(n)$, which results from computing two degree distributions (which is $O(n)$ ) and then comparing them (which is $O\left(k_{+}\right)$, with $k_{+}<n$ being the maximum degree in either network)[A.Tsitsulin].
+In terms of runtime complexity, the computational complexity of degree divergence is $O(n)$, which results from computing two degree distributions (which is $O(n)$ ) and then comparing them (which is $O\left(k_{+}\right)$, with $k_{+}<n$ being the maximum degree in either network)[A.Tsitsulin].
 
 \subsection{Laplacian Spectrum Distances}
-Laplacian Spectrum distance is the graph distance measure between the Laplacian spectra of $G1$ and ${G2}$. The spectra of both Laplacian matrices (normalized or not) is computed. Then, the discrete spectra are convolved with a kernel to produce continuous ones. Finally, these distribution are compared using a metric. The results dictionary also stores a 2-tuple of the underlying adjacency matrices in the key $adjacency_matrices$, the Laplacian matrices in $laplacian_matrices$, the eigenvalues of the Laplacians in ‘eigenvalues’. If the networks being compared are directed, the augmented adjacency matrices are calculated and stored in $augmented_adjacency_matrices$.
+Laplacian Spectrum distance is the graph distance measure between the Laplacian spectra of $G_1$ and ${G_2}$. The spectra of both normalized and unormalized Laplacian matrices are computed. The discrete spectra are then convolved with a kernel to generate continuous ones. Finally, a metric is used to compare these distributions. The results dictionary also keeps a 2-tuple of the underlying adjacency matrices in the key $adjacency$ $matrices$, the Laplacian matrices in $laplacian$ $matrices$, and the Laplacian eigenvalues in $eigenvalues$. If the compared networks are directed, the augmented adjacency matrices are computed and stored in $augmented$ $adjacency$ $matrices$. [A.Tsitsulin] goes into greater detail about calculating Laplacian Spectrum Distances.
 
-Many distances between two graphs, $\rho(\lambda)$ and $\rho^{\prime}(\lambda)$, use a direct comparison of their Laplacian spectrum. For all the methods below, we use the eigenvalues $\left\{\lambda_{1}=0 \leq\right.$ $\left.\lambda_{2} \leq \cdots \leq \lambda_{n}\right\}$ of the normalized Laplacian matrices $\mathbf{L}$ and $\mathbf{L}^{\prime}$. To perform the comparison, a subset of the whole spectrum can be used, e.g. the $k$ smallest [61] or largest $[6,27]$ in magnitude. Unless specified, we used all eigenvalues for comparison $(k=n)$.
-
-The distances compare the continuous spectra $\rho(\lambda)$ and $\rho^{\prime}(\lambda)$ associated with the graph $G$ and $G^{\prime}$. A continuous spectrum is obtained by the convolution of the discrete spectrum $\sum_{i} \delta\left(\lambda-\lambda_{i}\right)$ with a kernel $g\left(\lambda, \lambda^{*}\right)$
-
-\begin{equation}
-\rho(\lambda)=\frac{1}{Z} \sum_{i=1}^{n} \int_{0}^{2} g\left(\lambda, \lambda^{*}\right) \delta\left(\lambda^{*}-\lambda_{i}\right) \mathrm{d} \lambda^{*},
-\end{equation}
-
-where $Z$ is a normalization factor. Different types of distribution can be used for the kernel, for instance a Lorentzian distribution [43]
-
-\begin{equation}
-g\left(\lambda, \lambda^{*}\right)=\frac{\gamma}{\pi\left[\gamma^{2}+\left(\lambda-\lambda^{*}\right)^{2}\right]},
-\end{equation}
-
-or a Normal distribution
-
-\begin{equation}
-g\left(\lambda, \lambda^{*}\right)=\frac{\exp \left[-\left(\lambda-\lambda^{*}\right)^{2} / 2 \sigma^{2}\right]}{\sqrt{2 \pi \sigma^{2}}} .
-\end{equation}
-
-Different types of metrics can then be used to compare the spectra, such as the Euclidean metric
-
-\begin{equation}
-d\left(\rho, \rho^{\prime}\right)=\sqrt{\int_{0}^{2}\left[\rho(\lambda)-\rho^{\prime}(\lambda)\right]^{2} \mathrm{~d} \lambda},
-\end{equation}
-
-or the square root of the $\operatorname{JSD} d\left(\rho, \rho^{\prime}\right)=\sqrt{J S D\left(\rho, \rho^{\prime}\right)}$, written as
-
-\begin{equation}
-J S D\left(\rho, \rho^{\prime}\right)=\frac{1}{2} D_{K L}(\rho \| \bar{\rho})+\frac{1}{2} D_{K L}\left(\rho^{\prime} \| \bar{\rho}\right)
-\end{equation}
-
-where $\bar{\rho}=\left(\rho+\rho^{\prime}\right) / 2$. Various combination of kernels and metrics yield the following distinct distance measures:
-
-- Laplacian spectrum: Gaussian kernel, JSD distance LGJ
-
-- Laplacian spectrum: Lorenzian kernel, Euclidean distance LLE
-
-For both kernels, we use a half width at half maximum of $0.011775$ (which means the standard deviation for the Gaussian kernel is $\approx 0.01$ ).
-
-While we only focus on the two specific distances above, we note again that there is a world of possible combinations of descriptor-distance pairs to possibly use for comparing graphs. We selected the two above because their within-ensemble graph distance curves differed the most (e.g. as opposed to including Gaussian kernel / Euclidean distance or Lorenzian kernel / JSD). The computational complexity of this suite of graph distances is $O\left(n^{3}\right)$ due to the spectral decomposition of the Laplacian matrices of both graphs (see Appendix B 4).
+In terms of runtime complexity, the computational complexity of laplacian spectrum distances is $O(n^{3})$, which results from the spectral decomposition of the laplacian matrices of both graphs[A.Tsitsulin].
 
 \subsection{NetSimile}
-NetSimile NES is a method for comparing two graphs, $G$ and $G^{\prime}$, that is based on statistical features of the two graphs. It is invariant to graph labels and is able to compare graphs of different sizes [1]. It is calculated as the Canberera distance between the $7 \times 5$ feature matrix, $\mathbf{p}$ and $\mathbf{p}^{\prime}$, of each graph. To construct the $\mathbf{p}$ and $\mathbf{p}^{\prime}$ feature matrices, first a $7 \times n$ matrix is constructed for each, with each column, $j$, consisting of the following seven node-level quantities:
+NetSimile is a method for comparing two graphs, $G$ and $G^{\prime}$, based on their statistical features[A.Tsitsulin]. It is invariant to graph labels and can compare graphs of varying sizes [Berlingerio M, Koutra]. It is calculated as the Canberera distance between each graph's $7 \times 5$ feature matrix, $\mathbf{p}$ and $\mathbf{p}^{\prime}$. To construct the $\mathbf{p}$ and $\mathbf{p}^{\prime}$ feature matrices, first a $7 \times n$ matrix is constructed for each, with each column, $j$, consisting of the seven node-level quantities listed below [A.Tsitsulin]:
 
 1. degree, $k_{j}=\sum_{j} A_{i j}$
 
@@ -284,19 +260,19 @@ NetSimile NES is a method for comparing two graphs, $G$ and $G^{\prime}$, that i
 
 7. number of neighbors of the ego network $n n_{j}^{(e g o)}=$ $\sum_{i} 1_{\left\{\exists l \in \mathcal{N}_{f}: i \sim l, i \chi_{j}\right\}}$
 
-These features are then summarized into $\mathbf{p}$ and $\mathbf{p}^{\prime}$, which are $7 \times 5$ signature vectors consisting of the median,mean, standard deviation, skewness, and kurtosis of each feature. NetSimile uses the Canberra distance to arrive at a final scalar distance.
+
+The node-level quantities are then summarized into $\mathbf{p}$ and $\mathbf{p}^{\prime}$, which are $7 \times 5$ signature vectors consisting of the median,mean, standard deviation, skewness, and kurtosis of each feature. NetSimile uses the Canberra distance to arrive at a final scalar distance.[A.Tsitsulin]
 
 \begin{equation}
 D_{\mathrm{KSE}}\left(G, G^{\prime}\right)=d\left(\mathbf{p}, \mathbf{p}^{\prime}\right)=\sum_{i=1}^{n} \frac{\left|p_{i}-p_{i}^{\prime}\right|}{\left|p_{i}\right|+\left|p_{i}^{\prime}\right|}
 \end{equation}
+\caption{Source: [A.Tsitsulin]}
 
-The computational complexity of NES depends on two parts : features extraction and features aggregation. Features are all locally defined, hence their extraction will take $O(q n)$ where $q$ is the average degree of a node when selecting a random edge and choosing an endpoint [63]. Feature aggregation is $O(n \ln n)[1]$, hence the overall complexity is $O(q n+n \log n)$.
+In terms of runtime complexity, the computational complexity of NetSimile depends on two parts: features extraction and features aggregation. Because features are all locally defined, selecting a random edge and choosing an endpoint will take $O(q n)$, where $q$ is the average degree of a node [K.Henderson]. Hence, the overall complexity is $O(q n+n \log n)$, because the feature aggregation is $O(n \ln n)$[M.Belgrano, A.Tsitsulin].
 
 \subsection{Cosine Similarity}
 Originally used in text mining for document comparison, the cosine similarity computes the angle between the document vectors, without taking into account their lengths. It assigns higher similarity to vectors that point roughly in the same direction. 
-Returns: the cosine similarity values in [-1, 1]. the cosine similarity values are converted to a similarity measure in the range [0, 1]. According to literature, the most prevalent ways of deriving the similarity measure are the following:
-
-According to literature, the most prevalent ways of deriving the similarity measure are the following:
+The cosine similarity values calculated are in the range $\mathrm[-1, 1]$ and are then converted to a similarity measure in the range $\mathrm[0, 1]$. According to literature[Jiawei Han], the most prevalent ways of deriving the similarity measure are the following:
 
 1. $s=1-d$
 
@@ -307,29 +283,33 @@ According to literature, the most prevalent ways of deriving the similarity meas
 4. $s=e^{-d^{2}}$
 
 \subsection{Euclidean Distance}
-Based on the Euclidean distance measurement approach, the euclidean based similarity  is a normalized euclidean similarity measure that calculates the shortest distance between 2 points irrespective of their dimensions.  Returns: the calculated distance (d) converted to a similarity measure (s) in the range [0, 1].
-
-Compute the distance matrix between each pair from a vector array $\mathrm{X}$ and $\mathrm{Y}$.
-For efficiency reasons, the euclidean distance between a pair of row vector $x$ and $y$ is computed as:
-$\operatorname{dist}(x, y)=\operatorname{sqrt}(\operatorname{dot}(x, x)-2 * \operatorname{dot}(x, y)+\operatorname{dot}(y, y))$
-This formulation has two advantages over other ways of computing distances. First, it is computationally efficient when dealing with sparse data. Second, if one argument varies but the other remains unchanged, then dot ( $x, x)$ and/or dot ( $y$, $y$ ) can be pre-computed.
-However, this is not the most precise way of doing this computation, because this equation potentially suffers from "catastrophic cancellation". Also, the distance matrix returned by this function may not be exactly symmetric as required by, e.g., scipy. spatial. distance functions.
-Read more in the User Guide. An array where each row is a sample and each column is a feature.
-Y : \{array-like, sparse matrix $\}$ of shape (n_samples_ $Y, n_{-}$features), default=None An array where each row is a sample and each column is a feature. If None, method uses $Y=X$. default=None
-Pre-computed dot-products of vectors in $Y$ (e.g., $(Y * * 2) .$ sum (axis=1)) May be ignored in some cases, see the note below.
-squared : bool, default=False
-Return squared Euclidean distances.
-Pre-computed dot-products of vectors in $X($ e.g., $(X * * 2)$. sum(axis=1)) May be ignored in some cases, see the note below.
-Returns: distances : ndarray of shape (n_samples_X, n_samples_Y) Returns the distances between the row vectors of $X$ and the row vectors of $Y$.
+Based on the Euclidean distance measurement approach, the euclidean based similarity  is a normalized euclidean similarity measure that calculates the shortest distance between 2 points irrespective of their dimensions.  The calculated distance $d$ converted to a similarity measure $s$ in the range $\mathrm[0, 1]$.
 
 \subsection{Jaccard Similarity}
+Originally developed by Paul Jaccard [Jaccard], the Jaccard similarity also known as the Jaccard index or Jaccard similarity coefficient measures the similarities between sets. It is defined as the size of the intersection divided by the size of the union of two sets.
+
+\begin{equation}
+J(A, B)=\frac{|A \cap B|}{|A \cup B|}=\frac{|A \cap B|}{|A|+|B|-|A \cap B|}
+\end{equation}
+
+The Jaccard Similarity function is best used when calculating the similarity between small numbers of sets. The Jaccard coefficient is widely used in computer science, ecology, genomics, and other sciences that use binary data.  For hypothesis testing with the Jaccard coefficient, both the exact solution and the approximation methods are available.[chung nc]
+
 
 \subsection{Jaccard Distance}
-The Jaccard measure is computed using the adjacency matrix $\psi_{G}=\mathbf{A} \in\{0,1\}^{n \times n}$. For two graphs vertexlabeled $G$ and $G^{\prime}$,
+The Jaccard distance, which is complementary to the Jaccard similarity coefficient and measures dissimilarity between sample sets, is calculated by subtracting the Jaccard similarity coefficient from 1, or, alternatively, by dividing the difference between the sizes of the union and intersection of two sets by the size of the union:
+
+\begin{equation}
+d_{J}(A, B)=1-J(A, B)=\frac{|A \cup B|-|A|}{|A \cup B|}
+\end{equation}
+
+For this study, the Jaccard distance is computed between two graphs $G$ and $G^{\prime}$ using the adjacency matrix $\psi_{G}=\mathbf{A} \in\{0,1\}^{n \times n}$ [Source: S. McCabe]. For two graphs vertex labeled $G$ and $G^{\prime}$,
 
 \begin{equation}
 D_{\mathrm{JAC}}\left(G, G^{\prime}\right)=d_{\mathrm{JAC}}\left(\mathbf{A}, \mathbf{A}^{\prime}\right)=1-\frac{|\mathbf{S}|}{|\mathbf{T}|}
 \end{equation}
+\caption{Source: S. McCabe,}
 
-where $S_{i j}=A_{i j} A_{i j}^{\prime}$ represents the intersection of edge sets between graphs $G$ and $G^{\prime}$, while $T_{i j}=S_{i j}+(1-$ $\left.A_{i j}^{\prime}\right) A_{i j}+\left(1-A_{i j}\right) A_{i j}^{\prime}$ represents the union of edge sets between graphs. Here, $|\mathbf{S}|$ is the sum over the $S_{i j}$ and similarly for $|\mathbf{T}|$. The computational complexity of the Jaccard distance is $O\left(|E|+\left|E^{\prime}\right|\right)$ when using unordered sets to get the union and intersection sets and their cardinality. This is what is done in the netrd package [51]. Since nearly empty graphs likely have nearly zero edges in common, the $|\mathbf{S}||\mathbf{T}|$ will be nearly zero for $p$ close to 0 , so that $d_{J A C}$ approaches 1 at low $p$.
+$S_{i j}=A_{i j} A_{i j}^{\prime}$ represents the intersection of edge sets between graphs $G$ and $G^{\prime}$, while $T_{i j}=S_{i j}+(1-$ $\left.A_{i j}^{\prime}\right) A_{i j}+\left(1-A_{i j}\right) A_{i j}^{\prime}$ represents the union of edge sets between graphs. Here, $|\mathbf{S}|$ is the sum over the $S_{i j}$ and the same for $|\mathbf{T}|$. 
+
+In terms of runtime complexity, the computational complexity of the Jaccard distance is $O\left(|E|+\left|E^{\prime}\right|\right)$ when using unordered sets to obtain the union and intersection sets and their cardinality.
 
