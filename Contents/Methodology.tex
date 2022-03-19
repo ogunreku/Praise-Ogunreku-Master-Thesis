@@ -32,17 +32,19 @@ SciPy is a free and open-source Python library for scientific and technical comp
 \label{fig:flows}
 \end{figure}
 
-The similarity analysis will be performed on 21 major cities worldwide, following Louf and Barthelemy's (2014) sampling strategy of selecting cities based on a balance of high population, regional significance, and some stratification to ensure geographical diversity within regions. The 21 sampled cities span across Africa, Asia, Australia, Europe, Middle East, North America and South America. As a result, all samples represent a diverse range of historical, cultural, developmental, and design paradigms. Of course, there is no universally accepted definition of "city" or its spatial jurisdiction throughout the world, as these differ between countries for historical and political reasons. The aim is for consistency, by trying to use each study site’s closest approximation of a “municipality” for the city limits. Once these study sites are defined,  the OSMnx software is used to download the data and road network type for each city from OpenStreetMap. Due to its high-quality worldwide coverage, OpenStreetMap (OSM) is a collaborative online mapping platform commonly used by researchers. OpensStreetMap also provides extensive, user-contributed, open data on transport networks. OpenStreetMap’s raw data contain many interstitial nodes in the middle of street segments (forming an expansion graph) to allow streets to curve through space via a series of straight-line approximations. OSMnx automatically simplifies the topology for each graph to retain nodes only at intersections and dead-ends, while retaining for each edge their true spatial geometry. This provides accurate intersection counts and edge length measures for comparison between  networks with planar and nonplanar representations.
+The similarity analysis will be performed on 22 major cities worldwide, following Louf and Barthelemy's (2014) sampling strategy of selecting cities based on a balance of high population, regional significance, and some stratification to ensure geographical diversity within regions. The 22 sampled cities span across Africa, Asia, Australia, Europe, Middle East, North America and South America. As a result, all samples represent a diverse range of historical, cultural, developmental, and design paradigms. Of course, there is no universally accepted definition of "city" or its spatial jurisdiction throughout the world, as these differ between countries for historical and political reasons. The aim is for consistency, by trying to use each study site’s closest approximation of a “municipality” for the city limits. Once these study sites are defined, the OSMnx software is used to download the data and road network type for each city from OpenStreetMap. Due to its high-quality worldwide coverage, OpenStreetMap (OSM) is a collaborative online mapping platform commonly used by researchers. OpensStreetMap also provides extensive, user-contributed, open data on transport networks. OpenStreetMap’s raw data contain many interstitial nodes in the middle of street segments (forming an expansion graph) to allow streets to curve through space via a series of straight-line approximations. OSMnx automatically simplifies the topology for each graph to retain nodes only at intersections and dead-ends, while retaining for each edge their true spatial geometry. This provides accurate intersection counts and edge length measures for comparison between  networks with planar and nonplanar representations.
 
 \section{Selected Cities}
-As previously stated, this study selected 21 urban road networks from around the world, which are listed in Table 3.1, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of 21 data sets appears to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks one by one. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values. [Classification of Urban Street Networks Based on Tree-Like Network Features Baorui Han 1 , Dazhi Sun 2,*, Xiaomei Yu 1, Wanlu Song 1 and Lisha Ding 1] Furthermore, approximately 40 road network samples were chosen for this study on a preliminary basis. To clearly express the road network boundary and data distribution, city samples with similar patterns and parameters were removed.
+As previously stated, this study selected 22 urban road networks from around the world, which are listed in Table 3.1, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of 22 data sets appears to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks one by one. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values. [Classification of Urban Street Networks Based on Tree-Like Network Features Baorui Han 1 , Dazhi Sun 2,*, Xiaomei Yu 1, Wanlu Song 1 and Lisha Ding 1] Furthermore, approximately 40 road network samples were chosen for this study on a preliminary basis. To clearly express the road network boundary and data distribution, city samples with similar patterns and parameters were removed.
 Furthermore, each sample area was limited to two square kilometers for ease of comparison. (one kilometer by one kilometer)
 
 
 % Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
 % \usepackage{lscape}
 \begin{landscape}
 \begin{table}[]
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\textbf{City}} &
@@ -51,31 +53,32 @@ Furthermore, each sample area was limited to two square kilometers for ease of c
   \multicolumn{1}{c|}{\textbf{Continent}} &
   \multicolumn{1}{c|}{\textbf{Nodes}} &
   \multicolumn{1}{c|}{\textbf{Edges}} \\ \hline
-Jerusalem                       & Israel      & Cul-de-sac                & Asia          & 387  & 671  \\ \hline
-Amsterdam                       & Netherlands & Cul-de-Sac                & Europe        & 547  & 1049 \\ \hline
-Nairobi                         & Kenya       & Radial                    & Africa        & 410  & 793  \\ \hline
-District of Columbia            & USA         & Grid                      & North America & 461  & 1167 \\ \hline
-Berlin                          & Germany     & Grid                      & Europe        & 270  & 665  \\ \hline
-Helsinki                        & Finland     & Grid                      & Europe        & 417  & 913  \\ \hline
-Toronto                         & Canada      & Grid                      & North America & 325  & 827  \\ \hline
-St, Petersburg, Florida         & USA         & Grid                      & North America & 353  & 1069 \\ \hline
-Belgrano, Buenos Aires          & Argentina   & Grid                      & South America & 369  & 697  \\ \hline
-Roda Island, Cairo              & Egypt       & Radial                    & Africa        & 1036 & 2520 \\ \hline
-Jumeirah Islands, Dubai         & UAE         & Linear                    & Asia          & 93   & 198  \\ \hline
-Jakarta                         & Indonesia   & Linear                    & Asia          & 242  & 403  \\ \hline
-Sydney                          & Australia   & Linear                    & Australia     & 66   & 121  \\ \hline
-Connaught Place, New Delhi      & India       & Radial                    & Asia          & 391  & 853  \\ \hline
-Champs-Elysees, Paris           & France      & Radial                    & Europe        & 443  & 886  \\ \hline
-Athens                          & Greece      & Shifted Grid              & Europe        & 780  & 1405 \\ \hline
-Palmanova,Friuli-Venezia Giulia & Italy       & Radial                    & Europe        & 172  & 405  \\ \hline
-Surulere, Lagos                 & Nigeria     & Radial                    & Africa        & 280  & 629  \\ \hline
-Ejecutivo, Mexico City          & Mexico      & Shifted Grid              & South America & 530  & 1260 \\ \hline
-Copenhagen                      & Denmark     & Shifted Grid, Rectangular & Europe        & 421  & 875  \\ \hline
-Mumbai                          & India       & Tree                      & Asia          & 363  & 826  \\ \hline
-City of Westminster, London     & UK          & Tree                      & Europe        & 607  & 1346 \\ \hline
-\end{tabular}
-\caption{}
-\label{tab:Selected Cities}
+Jerusalem                       & Israel      & Cul-de-sac   & Asia          & 387  & 671  \\ \hline
+Amsterdam                       & Netherlands & Cul-de-Sac   & Europe        & 547  & 1049 \\ \hline
+Nairobi                         & Kenya       & Radial       & Africa        & 410  & 793  \\ \hline
+District of Columbia            & USA         & Grid         & North America & 461  & 1167 \\ \hline
+Berlin                          & Germany     & Grid         & Europe        & 270  & 665  \\ \hline
+Helsinki                        & Finland     & Grid         & Europe        & 417  & 913  \\ \hline
+Toronto                         & Canada      & Grid         & North America & 325  & 827  \\ \hline
+St, Petersburg, Florida         & USA         & Grid         & North America & 353  & 1069 \\ \hline
+Belgrano, Buenos Aires          & Argentina   & Grid         & South America & 369  & 697  \\ \hline
+Roda Island, Cairo              & Egypt       & Radial       & Africa        & 1036 & 2520 \\ \hline
+Jumeirah Islands, Dubai         & UAE         & Linear       & Asia          & 93   & 198  \\ \hline
+Jakarta                         & Indonesia   & Linear       & Asia          & 242  & 403  \\ \hline
+Sydney                          & Australia   & Linear       & Australia     & 66   & 121  \\ \hline
+Connaught Place, New Delhi      & India       & Radial       & Asia          & 391  & 853  \\ \hline
+Champs-Elysees, Paris           & France      & Radial       & Europe        & 443  & 886  \\ \hline
+Athens                          & Greece      & Shifted Grid & Europe        & 780  & 1405 \\ \hline
+Palmanova,Friuli-Venezia Giulia & Italy       & Radial       & Europe        & 172  & 405  \\ \hline
+Surulere, Lagos                 & Nigeria     & Radial       & Africa        & 280  & 629  \\ \hline
+Ejecutivo, Mexico City          & Mexico      & Shifted Grid & South America & 530  & 1260 \\ \hline
+Copenhagen                      & Denmark     & Shifted Grid & Europe        & 421  & 875  \\ \hline
+Mumbai                          & India       & Tree         & Asia          & 363  & 826  \\ \hline
+City of Westminster, London     & UK          & Tree         & Europe        & 607  & 1346 \\ \hline
+\end{tabular}%
+}
+\caption{Selected Cities}
+\label{tab:Selcted Cities}
 \end{table}
 \end{landscape}
 
@@ -92,30 +95,19 @@ City of Westminster, London     & UK          & Tree                      & Euro
 \end{figure}
 
 \section{Road Network Similarity Metrics}
-All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? For the first criteria 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level.  For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. For the Vector-based metrics, feature vectors F1 and F2 are assigned to each network G1 and G2, respectively. They define the similarity between G1 and G2 as 1 − Canberra(F1, F2) [13].2 For the Classifier-based metric,  a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). For each of these structures, a feature vector is calculated describing its structural properties (e.g., the number of edges within a node neighborhood); and the feature vectors are thereby labeled with the name of their respective network. Cross-validation is then used afterward to determine whether an SVM can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. In each round of cross-validation, the test set contains feature vectors from G1 and G2; and so for each of G1 and G2, they create a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. They define the similarity between G1 and G2 as 1−Canberra(F1, F2). If G1 and G2 have very similar local structures, then we expect that SVM will not be able to distinguish between the two classes of feature vectors, and F1 and F2 will be very similar. The distance between F1 and F2 will be very low, and so the similarity will be high. Conversely, if G1 and G2 have very different structures, then the SVM will have high classification accuracy and a low similarity score. For the matching-based metric, see () which goes into detail how this approach is described and can be applied. Table 2 categorizes all road network-similarity metrics
+All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? For the first criteria 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level.  For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. For the Vector-based metrics, feature vectors F1 and F2 are assigned to each network G1 and G2, respectively. They define the similarity between G1 and G2 as 1 − Canberra(F1, F2) [13].2 For the Classifier-based metric,  a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). For each of these structures, a feature vector is calculated describing its structural properties (e.g., the number of edges within a node neighborhood); and the feature vectors are thereby labeled with the name of their respective network. Cross-validation is then used afterward to determine whether an SVM can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. In each round of cross-validation, the test set contains feature vectors from G1 and G2; and so for each of G1 and G2, they create a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. They define the similarity between G1 and G2 as 1−Canberra(F1, F2). If G1 and G2 have very similar local structures, then we expect that SVM will not be able to distinguish between the two classes of feature vectors, and F1 and F2 will be very similar. The distance between F1 and F2 will be very low, and so the similarity will be high. Conversely, if G1 and G2 have very different structures, then the SVM will have high classification accuracy and a low similarity score. For the matching-based metric, see () which goes into detail how this approach is described and can be applied. Table 3.2 categorizes all road network-similarity metrics
 based on the two criteria mentioned above. Each of these 10 metrics is briefly described below. Based on previous studies and research (), because macro-level metrics consider the entire network at once, rather than local sub-structures, it is not possible for such metrics to be classifier- or matching-based.
 
-\begin{table}[]
+\begin{table}[!h]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}| p{3cm} | }
 \hline
-\multicolumn{1}{|c|}{\textbf{}} &
-  \textbf{Micro-Level} &
-  \textbf{Mezzo-level} &
-  \textbf{Macro-level} \\ \hline
-\textbf{Vector Based} &
-  NetSimile[], Euclidean Distance [], Cosine Similarity [] &
-  Random Walk[] &
-  Degree Divergence [], NetLSD[], Laplacian Spectra [] \\ \hline
-\textbf{Classifier Based} &
-  Jaccard Similarity [] &
-  Shortest Path Kernel [], Jaccard Distance [] &
-  - \\ \hline
-\end{tabular}%
-}
-\caption{}
-\label{tab:Road network similarity metrics used in this study, organized by (1) network level and (2) comparison type.}
+& \textbf{Micro-Level} & \textbf{Mezzo-level} & \textbf{Macro-level} \\ \hline
+\textbf{Vector-Based} & NetSimile[], Euclidean Distance [], Cosine Similarity [] & Random Walk[] & Degree Divergence [], NetLSD[], Laplacian Spectra [] \\ \hline
+\textbf{Classifier-Based} & Jaccard Similarity [] & Shortest Path Kernel [], Jaccard Distance [] & - \\ \hline
+\end{tabular}
+\caption{Road network similarity methods used in this study organized by 1 network level and 2 comparison type}
+\label{tab:Road Network Similarity Methods}
 \end{table}
 
 \subsection{Shortest Path Kernel}
