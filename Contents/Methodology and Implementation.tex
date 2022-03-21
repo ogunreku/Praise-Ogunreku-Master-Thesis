@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%
-% Methodology %
+% Methodology and Implementation %
 %%%%%%%%%%%%%%%%%
 
 This study builds on a rich body of road and graph network research by analyzing the similarities between different road networks.
@@ -11,33 +11,11 @@ This study builds on a rich body of road and graph network research by analyzing
 \label{fig:flows}
 \end{figure}
 
-\section{Software}
-\subsection{Python}
-The coding implementation will be fully done in the Python3 programming language. In addition, open source libraries based on python will be extensively used for this thesis project.
-
-\subsection{NetworkX}
-NetworkX is a Python package that allows you to create, manipulate, and investigate the structure, dynamics, and functions of complex networks.[Aric A. Hagberg, Daniel A. Schult and Pieter J. Swart, “Exploring network structure, dynamics, and function using NetworkX”, in Proceedings of the 7th Python in Science Conference (SciPy2008), Gäel Varoquaux, Travis Vaught, and Jarrod Millman (Eds), (Pasadena, CA USA), pp. 11–15, Aug 2008]
-
-\subsection{OSMnx}
-OSMnx is a free, open-source, Python-based toolkit to automatically download spatial data (including municipal boundaries and streets) from OpenStreetMap (OSM) and construct graph-theoretic objects for network analysis (Boeing, 2017). It differentiates between walkable and drivable routes based on individual elements’ metadata that describe how the route may be used. Thus the walkable network may contain surface streets, paths through parks, pedestrian flyovers, passageways between buildings, and other walkable paths. The drivable network may contain surface streets, grade-separated freeways, and other drivable routes. OSMnx is built on top of Python's NetworkX, matplotlib, and geopandas libraries for rich network analytic capabilities, beautiful and simple visualizations, and fast spatial queries with R-tree indexing.
-
-\subsection{Scikit-learn}
-Scikit-learn is a free and open source machine learning library that can perform both supervised and unsupervised learning. It also includes a variety of tools for model fitting, data preprocessing, model selection and evaluation, and a variety of other utilities.
-
-\subsection{Scipy}
-SciPy is a free and open-source Python library for scientific and technical computing. [Pauli Virtanen; Ralf Gommers; Travis E. Oliphant; et al. (3 February 2020). "SciPy 1.0: fundamental algorithms for scientific computing in Python" (PDF). Nature Methods. 17 (3): 261–272. doi:10.1038/S41592-019-0686-2. ISSN 1548-7091. PMC 7056644. PMID 32015543. Wikidata Q84573952.] SciPy includes modules for optimization, linear algebra, integration, interpolation, special functions, FFT, signal and image processing, ODE solvers, and other tasks common in science and engineering.
-
-\subsection{Grakel}
-GraKeL is a Python package that contains implementations of several graph kernels, a class of powerful methods that allow kernel-based learning approaches like SVMs to work directly on graphs.[Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]
-
-\subsection{netrd}
-netrd is a NetworkX-based library that provides a consistent interface to various utilities for graph distances, graph reconstruction from time series data, and network simulation dynamics.[S. McCabe]
-
 
 \section{Data}
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.25\textwidth,center]{picture/flow1.png}
+\includegraphics[width=0.35\textwidth,center]{picture/flow1.png}
 \caption[Miniaturtrichter]{Data processing flow}
 \label{fig:flows}
 \end{figure}
@@ -313,3 +291,24 @@ $S_{i j}=A_{i j} A_{i j}^{\prime}$ represents the intersection of edge sets betw
 
 In terms of runtime complexity, the computational complexity of the Jaccard distance is $O\left(|E|+\left|E^{\prime}\right|\right)$ when using unordered sets to obtain the union and intersection sets and their cardinality.
 
+\section{Software}
+\subsection{Python}
+The coding implementation will be fully done in the Python3 programming language. In addition, open source libraries based on python will be extensively used for this thesis project.
+
+\subsection{NetworkX}
+NetworkX is a Python package that allows you to create, manipulate, and investigate the structure, dynamics, and functions of complex networks.[Aric A. Hagberg, Daniel A. Schult and Pieter J. Swart, “Exploring network structure, dynamics, and function using NetworkX”, in Proceedings of the 7th Python in Science Conference (SciPy2008), Gäel Varoquaux, Travis Vaught, and Jarrod Millman (Eds), (Pasadena, CA USA), pp. 11–15, Aug 2008]
+
+\subsection{OSMnx}
+OSMnx is a free, open-source, Python-based toolkit to automatically download spatial data (including municipal boundaries and streets) from OpenStreetMap (OSM) and construct graph-theoretic objects for network analysis (Boeing, 2017). It differentiates between walkable and drivable routes based on individual elements’ metadata that describe how the route may be used. Thus the walkable network may contain surface streets, paths through parks, pedestrian flyovers, passageways between buildings, and other walkable paths. The drivable network may contain surface streets, grade-separated freeways, and other drivable routes. OSMnx is built on top of Python's NetworkX, matplotlib, and geopandas libraries for rich network analytic capabilities, beautiful and simple visualizations, and fast spatial queries with R-tree indexing.
+
+\subsection{Scikit-learn}
+Scikit-learn is a free and open source machine learning library that can perform both supervised and unsupervised learning. It also includes a variety of tools for model fitting, data preprocessing, model selection and evaluation, and a variety of other utilities.
+
+\subsection{Scipy}
+SciPy is a free and open-source Python library for scientific and technical computing. [Pauli Virtanen; Ralf Gommers; Travis E. Oliphant; et al. (3 February 2020). "SciPy 1.0: fundamental algorithms for scientific computing in Python" (PDF). Nature Methods. 17 (3): 261–272. doi:10.1038/S41592-019-0686-2. ISSN 1548-7091. PMC 7056644. PMID 32015543. Wikidata Q84573952.] SciPy includes modules for optimization, linear algebra, integration, interpolation, special functions, FFT, signal and image processing, ODE solvers, and other tasks common in science and engineering.
+
+\subsection{Grakel}
+GraKeL is a Python package that contains implementations of several graph kernels, a class of powerful methods that allow kernel-based learning approaches like SVMs to work directly on graphs.[Siglidis, Giannis & Nikolentzos, Giannis & Limnios, Stratis & Giatsidis, Christos & Skianis, Konstantinos & Vazirgianis, Michalis. (2018). GraKeL: A Graph Kernel Library in Python. ]
+
+\subsection{netrd}
+netrd is a NetworkX-based library that provides a consistent interface to various utilities for graph distances, graph reconstruction from time series data, and network simulation dynamics.[S. McCabe]
