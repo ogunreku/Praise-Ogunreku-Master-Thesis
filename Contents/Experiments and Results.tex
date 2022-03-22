@@ -2,9 +2,11 @@
 % Experiments and Results %
 %%%%%%%%%%%%%%%%%%%%%
 
-This thesis aims to analyze the relationships between different road networks and road network similarity methods. In particular,  (1) the similarities between different road networks are determined, (2) determine the correlations between the different network similarity methods used for identifying the similarities between the different road networks, (3) cluster road networks that are similar, and (4) cluster methods that are similar. Figure's 4.1 and 4.2 contains an overview of the process respectively. The problem is explicitly approached through the use of network-similarity ranking. A reference network Gr and a collection of comparison networks H1, H2,...., Hk are given with this application. The similarity between Gr and each Hi is calculated using a network-similarity method, and the comparison networks are ranked in order of their similarity to the reference network Gr. Similar methods that generate similar scores can be compared over a wide range of values by approaching the problem from the standpoint of ranking rather than raw similarity scores. Given a reference network, a collection of networks to be compared, and m network similarity methods, M rankings of the comparison networks are generated. The m rankings are then compared to determine the degree of similarity between the different methods.
- To find road networks with similar structures and patterns, the road networks are clustered.
-The complete-linkage hierarchical clustering method is used for this step because it produces a dendrogram with many small clusters, which provides insight into which road network groups are closely similar or correlated. The clustering results show which groups of road networks have comparable similarities in their structure and pattern. To find methods with similar behavior, we implement the same approach as used earlier to find similar road networks; the difference is that the methods are clustered based on pairwise Kendall-Tau distances, which is then followed by a complete-linkage hierarchical clustering because it produces a dendrogram with many small clusters, which provides insight into which groups of methods are closely correlated—the results of this clustering show which groups of methods have similar behavior.
+This thesis aims to analyze the relationships between different road networks and road network similarity methods. In particular,  (1) the similarities between different road networks are determined, (2) similar road networks are clustered, (3) the correlations between the different network similarity methods used to identify the similarities between the different road networks are also determined, and (4) the similar methods are clustered. Figures 4.1 and 4.2 show a high-level overview of the process. 
+
+The problem to find road networks with similar structures and patterns is explicitly approached using network-similarity ranking[Soundarajan]. Firstly, a reference network Gr and a collection of comparison networks H1, H2,...., Hk are given. A network-similarity method is used to calculate the similarity between Gr and each Hi. Second, the comparison networks are clustered and ranked according to how similar they are to the reference network Gr. This step employs the complete-linkage hierarchical clustering method, which generates a dendrogram with many small clusters, providing insight into which road network groups are closely similar or correlated. The clustering results show which groups of road networks have comparable structural and pattern similarities. 
+
+To find methods that behave similarly, Firstly, the pairwise Kendall-Tau distance between each pair of methods is calculated to determine correlations between the different methods which is then followed by a complete-linkage hierarchical clustering because it produces a dendrogram with many small clusters, which provides insight into which groups of methods are closely correlated—the results of this clustering show which groups of methods have similar behavior. 
 
 \begin{figure}[h]
 \centering
@@ -13,7 +15,84 @@ The complete-linkage hierarchical clustering method is used for this step becaus
 \label{fig:network ranking}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.25\textwidth,center]{picture/ranking.png}
+\caption[Miniaturtrichter]{Road Networking Similarity and Ranking}
+\label{fig:network ranking}
+\end{figure}
+
+
 \subsection{Grid Road Network Similarity Analysis}
+This section describes the experiments to identify similar road networks with Grid road network patterns and structure, likewise groups of methods have similar behavior.
+
+Firstly, 
+We
+begin by applying our comparison approaches to the 7
+cross-sectional datasets and 20 network similarity methods
+described earlier. We consider each of the 7 networks
+individually as a reference network. For each reference
+network, we produce two baseline networks by
+deleting a random 5% of edges and by rewiring a random
+5% of edges in such a way as to preserve degree distribution.
+We then use the 20 methods to rank the other
+8 networks (including the 2 baseline networks) relative
+to the reference network. We calculate the Kendall-Tau
+distances between each pair of these 20 rankings. The
+average Kendall-Tau distance between rankings, over all
+networks and all metrics, is 0.28 with a standard deviation
+of 0.14. Recall that a distance of 0 indicates perfect
+correlation. The average nDCG correlation (with 1 indicating
+the highest possible correlation) is 0.93, with
+a standard deviation of 0.06. Figure 2 contains the
+Kendall-Tau distances between the di↵erent methods
+for the case when DBLP was used as a reference graph.
+For brevity, we have omitted the heatmap depicting the
+nDCG correlations. Surprisingly, the di↵erent methods
+are usually correlated with one another even though
+they have di↵erent objective functions. Methods RW
+and RWR have an average Kendall-Tau distance across
+all networks of 0.09, and an average nDCG correlation
+of 0.99. This low distance (or alternatively, high correlation)
+is expected because the two methods are very similar; but in other cases, the results are more surprising.
+For instance, NetSimile and RWR have an average
+Kendall-Tau distance of 0.12 and an average nDCG of
+0.99, despite having very di↵erent objective functions. 
+
+Next, we cluster the methods using completelinkage
+hierarchical clustering on the pairwise Kendall-
+Tau distances. Here, we are interested in learning whether groups of complex methods are associated with
+simpler, more intuitive methods. For each reference
+network, we perform the clustering 1000 times and select
+the most common dendrogram. We observe certain
+clusters across many of these dendrograms. Table
+4 lists clusters observed in four or more clusters out
+of the seven considered. Some clusters contain a mix
+of both complex as well as simple methods. For example,
+RW-Match, RWR-Match, and BFS-Match behave
+very much like the much simpler Density method.
+
+This suggests that for frequent network similarity tasks,
+one could use the computationally more efficient Density
+method as a replacement for these computationally
+intensive community-based methods.
+Lastly, we apply the Kemeny-Young method to obtain
+a single consensus ranking. Table 5 lists the five
+similarity methods that are closest to this consensus for
+each network, as measured by Kendall-Tau distance.
+NetSimile (or one of its variations) and RWR appear
+in the top five positions for each network. RWR has
+an average Kendall-Tau distance of 0.06 from the consensus,
+averaged over all networks. However, RWR has
+an average Kendall-Tau distance of 0.21 from the other
+similarity methods. This suggests that it is consistently
+close to the consensus (i.e., median) ranking, but not
+because it is simply close to the other rankings in general.
+A user interested in selecting a single representative
+method for network similarity ranking should thus
+simply select NetSimile or RWR.
+
+
 \subsection{Radial Road Network Similarity Analysis}
 \subsection{Tree Road Network Similarity Analysis}
 \subsection{Linear Road Network Similarity Analysis}
