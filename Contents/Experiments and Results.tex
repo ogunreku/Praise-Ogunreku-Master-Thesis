@@ -48,9 +48,12 @@ Initially, one will expect that the road networks within the green cluster shoul
 \label{fig:Heatmap showing the correlations for Grid Road Networks}
 \end{figure}
 
+
+Furthermore, dendrograms only tell us a little bit about the similarities of road networks based on the clusers generated. The dendrogram clearly depicts a different picture, with some road networks grouped differently (see how the distribution of the road networks is mixed). For example, St. Petersburg, Florida, which is considered to be among the most similar to the reference network based on the similarity scores in figure \ref{fig:Heatmap showing the correlations for Grid Road Networks}, is later combined with the clusters of Ejecutivo, Toronto, and the District of Columbia (USA). As the dendrogram results are not intuitive, it is not suitable for interpreting the similarity results. Further analysis or another alternative to visualize the results of the similar scores is recommended.
+
 In addition, dendrograms only tell us a bit in terms similarities of road networks based on the clusers generated. The dendrogram clearly shows a different picture, where some of the road networks are grouped differently (see how the distribution of the road networks is mixed). For example, St, Petersburg, Florida which from the similarity scores in figure \ref{fig:Heatmap showing the correlations for Grid Road Networks} considered to be amongst the most similar to the reference network is later put together with cluster of Ejecutivo, Toronto and the District of Columbia (USA). Further analysis is recommended or another alternative to visualize the results of the similar scores is recommended as the dendrogram results are not intuitive, thus making it not suitable for interpreting the similarity results.
 
-To find methods that behave similarly, Firstly, the pairwise Kendall-Tau distance between each pair of methods is calculated to determine correlations between the different methods which is then followed by a complete-linkage hierarchical clustering because it produces a dendrogram with many small clusters, which provides insight into which groups of methods are closely correlated—the results of this clustering show which groups of methods have similar behavior. 
+To find methods that behave similarly, the pairwise Kendall-Tau distance between each pair of methods is calculated first, followed by a complete-linkage hierarchical clustering because it produces a dendrogram with many small clusters, which provides insight into which groups of methods are closely correlated.
 
 \begin{figure}[!ht]
 \centering
@@ -59,22 +62,63 @@ To find methods that behave similarly, Firstly, the pairwise Kendall-Tau distanc
 \label{fig:network ranking}
 \end{figure}
 
-Each square shows the correlation between the variables on each axis. Correlation ranges from 0 to 1. Values closer to zero means there is no linear trend between the two variables. The close to 1 the correlation is the more positively correlated they are; that is as one increases so does the other and the closer to 1 the stronger this relationship is. A correlation closer to 0 is similar, but instead of both increasing one variable will decrease as the other increases. The diagonals are all 1/dark blue because those squares are correlating each variable to itself (so it's a perfect correlation). For the rest the larger the number and darker the color the higher the correlation between the two variables. The plot is also symmetrical about the diagonal since the same two variables are being paired together in those squares.
+Each square illustrates the relationship between the variables on each axis. Correlation values range from 0 to 1. Values close to zero indicate that there is no linear relationship between the two variables. The closer the correlation is to one, the more positively correlated they are; that is, as one increases, so does the other, and the closer to one, the stronger the relationship. A correlation closer to 0 is similar, but instead of both variables increasing, one variable decreases as the other increases. The diagonals are all 1/dark blue because those squares are perfectly correlating each variable to itself. For the rest, the higher the correlation between the two variables, the larger the number and the darker the color. Because the same two variables are paired together in those squares, the plot is also symmetrical about the diagonal.
 
-Figure \ref{fig:network ranking} contains the Kendall-Tau distances between the scores produced by the different methods where comparing road networks similar to the reference network with a Grid pattern. Results obtained using both the Jaccard Distance and Jaccard Similarity show a positive correlation of 1 when using both methods. This is expected as the Jaccard Distance is considered complementary to the Jaccard similarity which is obtained by subtracting the Jaccard coefficient from 1 . The methods cosine similarity and euclidean distance also behave similar with a correlation of 0.9. Both methods are vector based and operate at the micro level as mentioned in Table \ref{tab:Road Network Similarity Methods}. This suggest that one could use either of the two methods when calculating vector based similarity on road networks at the Micro-level. However, for the other methods, the exist a pronounced weaker correlation between them as both the level of the network they operate and the type of comparison they use are different. 
+The Kendall-Tau distances between the scores produced by the different methods when comparing road networks similar to the reference network with a Grid pattern are shown in figure \ref{fig:network ranking}. When both the Jaccard Distance and the Jaccard Similarity are used, the results show a positive correlation of 1. This is to be expected given that the Jaccard Distance is thought to be complementary to the Jaccard Similarity, which is obtained by subtracting the Jaccard coefficient from 1. With a correlation of 0.9, the methods cosine similarity and euclidean distance also behave similarly. As shown in table \ref{tab:Road Network Similarity Methods}, both methods are vector-based and operate at the micro level. This implies that when calculating vector-based similarity on road networks at the Micro-level, either of the two methods could be used. However, there is a pronounced weaker correlation between the other methods because the level of the network they operate on and the type of comparison they use are different.
 
-Next, the methods are clustered using the complete linkage hierarchical clustering on the pairwise Kendall Tau distances as one of the goals of adopting this approach is to learn if certain network similarity methods are associated with each other. The results of the dendrogram are presented in the appendix section.
+Next, the methods are clustered using complete linkage hierarchical clustering on the pairwise Kendall Tau distances, as one of the goals of using this approach is to determine whether certain network similarity methods are associated with each other. The dendrogram results are presented in the appendix section.
 
-Finally, we can infer that the methods operate independent of the pattern of the road network but on the topological characteristics that define the road networks as graphs.
+Finally, we can conclude that the methods operate independently of the road network pattern, but rather on the topological characteristics that define road networks as graphs.
 
 
 \section{Radial Road Network Similarity Analysis}
+
+The District of Columbia (USA) is chosen as the reference network for the Grid road similarity analysis, and the methods are used to compare the other networks to the reference network and generate a numerical similarity score. The networks are then clustered in hierarchical order. The goal is to see if certain road networks are similar to the reference network's Grid pattern, which generates a dendrogram with road network patterns that are similar to the reference road network pattern. The results for this analysis are presented in Figure \ref{fig:Hierarchical Clustering Dendrogram for Radial Road Networking Similarity}.
+
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.85\textwidth,center]{picture/Radial/radial_metrics_dendrogram.png}
+\includegraphics[width=0.75\textwidth,center]{picture/Radial/radial_dendrogram2.png}
 \caption[Hierarchical Clustering Dendrogram for Radial Road Networking Similarity]{Hierarchical Clustering Dendrogram for Radial Road Networking Similarity}
 \label{fig:Hierarchical Clustering Dendrogram for Radial Road Networking Similarity}
 \end{figure}
+
+Figure \ref{fig:Hierarchical Clustering Dendrogram for Radial Road Networking Similarity} presents the dendrogram obtained from the cluster analysis. The dendrogram  is interpreted using two criterias. First, a branch or cluster that includes the reference network. Second, the arrangement of the clusters which tells us the road networks that are most similar to each other, as the height of the cluster measured in distance, indicates how similar or different the road networks are from each other. The greater the distance, the greater the difference. 
+
+For the first criteria, two major clusters (Green and Orange) can be observed from the dendrogram's structure except for the outlier; berlin road network (Blue). Looking at the green cluster, the road network for the cities Ejecutivo and Toronto lie near the reference network: District of Columbia (USA) in one adjacent cluster and are later grouped as a single cluster which indicates that this cities are the most pronounced grid-like structure similar to the reference network. 
+
+Interpreting the dendrogram using the second criteria, the road networks for the cities Champs-Elysees, Paris and Amsterdam, Netherlands are said to be clustered first as they tend to have the cluster with the relatively shortest distance. Therefore they are the most similar than any other cluster of road networks at a higher level.
+
+Initially, one will expect that the road networks within the green cluster should have similarities to the grid pattern of the reference network, likewise have clusters with the shortest distance, but by cross-checking with the similarity scores for each method included in the heatmap in figure \ref{fig:Heatmap showing the correlations for Radial Road Networks}, it is possible to identify the characteristics of each cluster and why certain clusters are grouped together.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.85\textwidth,center]{picture/Radial/radialheatmap.png}
+\caption[Heatmap showing the correlations for Radial Road Networks]{Heatmap showing the correlations between the road networks when the road network: District of Columbia was used as the reference network.}
+\label{fig:Heatmap showing the correlations for Radial Road Networks}
+\end{figure}
+
+
+Furthermore, dendrograms only tell us a little bit about the similarities of road networks based on the clusers generated. The dendrogram clearly depicts a different picture, with some road networks grouped differently (see how the distribution of the road networks is mixed). For example, St. Petersburg, Florida, which is considered to be among the most similar to the reference network based on the similarity scores in figure \ref{fig:Heatmap showing the correlations for Radial Road Networks}, is later combined with the clusters of Ejecutivo, Toronto, and the District of Columbia (USA). As the dendrogram results are not intuitive, it is not suitable for interpreting the similarity results. Further analysis or another alternative to visualize the results of the similar scores is recommended.
+
+In addition, dendrograms only tell us a bit in terms similarities of road networks based on the clusers generated. The dendrogram clearly shows a different picture, where some of the road networks are grouped differently (see how the distribution of the road networks is mixed). For example, St, Petersburg, Florida which from the similarity scores in figure \ref{fig:Heatmap showing the correlations for Radial Road Networks} considered to be amongst the most similar to the reference network is later put together with cluster of Ejecutivo, Toronto and the District of Columbia (USA). Further analysis is recommended or another alternative to visualize the results of the similar scores is recommended as the dendrogram results are not intuitive, thus making it not suitable for interpreting the similarity results.
+
+To find methods that behave similarly, the pairwise Kendall-Tau distance between each pair of methods is calculated first, followed by a complete-linkage hierarchical clustering because it produces a dendrogram with many small clusters, which provides insight into which groups of methods are closely correlated.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.85\textwidth,center]{picture/Radial/radial2.png}
+\caption[Heatmap showing Kendall-Tau correlations between the road network similarity methods for Radial Road Networks]{Heatmap showing Kendall-Tau correlations between the road network similarity methods when the road network: District of Columbia was used as the reference network.}
+\label{fig:network ranking radial}
+\end{figure}
+
+Each square illustrates the relationship between the variables on each axis. Correlation values range from 0 to 1. Values close to zero indicate that there is no linear relationship between the two variables. The closer the correlation is to one, the more positively correlated they are; that is, as one increases, so does the other, and the closer to one, the stronger the relationship. A correlation closer to 0 is similar, but instead of both variables increasing, one variable decreases as the other increases. The diagonals are all 1/dark blue because those squares are perfectly correlating each variable to itself. For the rest, the higher the correlation between the two variables, the larger the number and the darker the color. Because the same two variables are paired together in those squares, the plot is also symmetrical about the diagonal.
+
+The Kendall-Tau distances between the scores produced by the different methods when comparing road networks similar to the reference network with a Grid pattern are shown in figure \ref{fig:network ranking radial}. When both the Jaccard Distance and the Jaccard Similarity are used, the results show a positive correlation of 1. This is to be expected given that the Jaccard Distance is thought to be complementary to the Jaccard Similarity, which is obtained by subtracting the Jaccard coefficient from 1. With a correlation of 0.9, the methods cosine similarity and euclidean distance also behave similarly. As shown in table \ref{tab:Road Network Similarity Methods}, both methods are vector-based and operate at the micro level. This implies that when calculating vector-based similarity on road networks at the Micro-level, either of the two methods could be used. However, there is a pronounced weaker correlation between the other methods because the level of the network they operate on and the type of comparison they use are different.
+
+Next, the methods are clustered using complete linkage hierarchical clustering on the pairwise Kendall Tau distances, as one of the goals of using this approach is to determine whether certain network similarity methods are associated with each other. The dendrogram results are presented in the appendix section.
+
+Finally, we can conclude that the methods operate independently of the road network pattern, but rather on the topological characteristics that define road networks as graphs.
+
 
 \section{Tree Road Network Similarity Analysis}
 \section{Linear Road Network Similarity Analysis}
