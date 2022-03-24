@@ -7,8 +7,8 @@ This study builds on a rich body of road and graph network research by analyzing
 \begin{figure}[h]
 \centering
 \includegraphics[width=1.25\textwidth,center]{picture/flows.png}
-\caption[Miniaturtrichter]{Methodology flow}
-\label{fig:flows}
+\caption[Methodology Workflow]{Methodology Workflow}
+\label{fig:Methodology Workflow}
 \end{figure}
 
 
@@ -16,14 +16,14 @@ This study builds on a rich body of road and graph network research by analyzing
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.35\textwidth,center]{picture/flow1.png}
-\caption[Miniaturtrichter]{Data processing flow}
-\label{fig:flows}
+\caption[Data Processing Workflow]{Data Processing Workflow}
+\label{fig:Data Processing Workflow}
 \end{figure}
 
 The similarity analysis will be performed on 22 major cities worldwide, following Louf and Barthelemy's (2014) sampling strategy of selecting cities based on a balance of high population, regional significance, and some stratification to ensure geographical diversity within regions. The 22 sampled cities span across Africa, Asia, Australia, Europe, Middle East, North America and South America. As a result, all samples represent a diverse range of historical, cultural, developmental, and design paradigms. Of course, there is no universally accepted definition of "city" or its spatial jurisdiction throughout the world, as these differ between countries for historical and political reasons. The aim is for consistency, by trying to use each study site’s closest approximation of a “municipality” for the city limits. Once these study sites are defined, the OSMnx software is used to download the data and road network type for each city from OpenStreetMap. Due to its high-quality worldwide coverage, OpenStreetMap (OSM) is a collaborative online mapping platform commonly used by researchers. OpensStreetMap also provides extensive, user-contributed, open data on transport networks. OpenStreetMap’s raw data contain many interstitial nodes in the middle of street segments (forming an expansion graph) to allow streets to curve through space via a series of straight-line approximations. OSMnx automatically simplifies the topology for each graph to retain nodes only at intersections and dead-ends, while retaining for each edge their true spatial geometry. This provides accurate intersection counts and edge length measures for comparison between  networks with planar and nonplanar representations.
 
 \section{Selected Cities}
-As previously stated, this study selected 22 urban road networks from around the world, which are listed in Table 3.1, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of 22 data sets appears to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks one by one. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values. [Classification of Urban Street Networks Based on Tree-Like Network Features Baorui Han 1 , Dazhi Sun 2,*, Xiaomei Yu 1, Wanlu Song 1 and Lisha Ding 1] Furthermore, approximately 40 road network samples were chosen for this study on a preliminary basis. To clearly express the road network boundary and data distribution, city samples with similar patterns and parameters were removed.
+As previously stated, this study selected 22 urban road networks from around the world, which are listed in Table \ref{tab:Selected Cities}, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of 22 data sets appears to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks one by one. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values. [Classification of Urban Street Networks Based on Tree-Like Network Features Baorui Han 1 , Dazhi Sun 2,*, Xiaomei Yu 1, Wanlu Song 1 and Lisha Ding 1] Furthermore, approximately 40 road network samples were chosen for this study on a preliminary basis. To clearly express the road network boundary and data distribution, city samples with similar patterns and parameters were removed.
 Furthermore, each sample area was limited to two square kilometers for ease of comparison. (one kilometer by one kilometer)
 
 
@@ -66,7 +66,7 @@ City of Westminster, London     & UK          & Tree         & Europe        & 6
 \end{tabular}%
 }
 \caption{Selected Cities}
-\label{tab:Selcted Cities}
+\label{tab:Selected Cities}
 \end{table}
 \end{landscape}
 
@@ -78,14 +78,14 @@ City of Westminster, London     & UK          & Tree         & Europe        & 6
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth,center]{picture/Graphs2.png}
-\caption[Miniaturtrichter]{Road Network Graphs}
+\caption[Road Network Graphs]{Road Network Graphs}
 \label{fig:roadnetworkgraphs}
 \end{figure}
 
 \section{Road Network Similarity Metrics}
 All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? 
 
-For the first criteria 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level[Soundarajan].
+For the first criteria, 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level[Soundarajan].
 
 
 For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. 
