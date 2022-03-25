@@ -28,7 +28,7 @@
 \hypersetup{  
     colorlinks=true, 
     linkcolor=black, 
-    citecolor=red, 
+    citecolor=black, 
     urlcolor=blue  
     }
 %make the reference clickable----------------------
@@ -39,7 +39,7 @@
 %refer to https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
 \usepackage[
     backend=biber,
-    style=alphabetic,
+    style=authoryear,
     sorting=ynt
     ]{biblatex}
 \addbibresource{reference.bib} %Import the bibliography file
@@ -52,6 +52,7 @@
 \usepackage{graphicx} % insert figures
 \usepackage[export]{adjustbox} % for title page
 \usepackage{xcolor}
+\usepackage{pdfpages}
 \usepackage{csvsimple}
 \usepackage{float} %used to place figure with specifier [H]
 %colors&figures------------------------------------
