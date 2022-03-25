@@ -39,19 +39,21 @@
 %refer to https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
 \usepackage[
     backend=biber,
-    style=authoryear,
-    sorting=ynt
-    ]{biblatex}
+    citestyle=authoryear, 
+    bibstyle=numeric, 
+    sorting=anyt]{biblatex}
 \addbibresource{reference.bib} %Import the bibliography file
 \usepackage{url} %make the online sites clickable
 %bibliography--------------------------------------
 %--------------------------------------------------
 
+%\usepackage{apacite}
+%\bibliographystyle{apacite}
+%\bibliography{reference.bib}
 %colors&figures------------------------------------
 \usepackage{geometry} % adjust the pages configuration
 \usepackage{graphicx} % insert figures
 \usepackage[export]{adjustbox} % for title page
-\usepackage{xcolor}
 \usepackage{pdfpages}
 \usepackage{csvsimple}
 \usepackage{float} %used to place figure with specifier [H]
