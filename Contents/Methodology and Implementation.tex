@@ -23,7 +23,7 @@ This study builds on a rich body of road and graph network research by analyzing
 The similarity analysis will be performed on 22 major cities worldwide, following [\cite{Louf:2014}] sampling strategy of selecting cities based on a balance of high population, regional significance, and some stratification to ensure geographical diversity within regions. The 22 sampled cities span across Africa, Asia, Australia, Europe, Middle East, North America and South America. As a result, all samples represent a diverse range of historical, cultural, developmental, and design paradigms. Of course, there is no universally accepted definition of "city" or its spatial jurisdiction throughout the world, as these differ between countries for historical and political reasons. The aim is for consistency, by trying to use each study site’s closest approximation of a “municipality” for the city limits. Once these study sites are defined, the OSMnx software [\cite{Boeing:2017}] is used to download the data and road network type for each city from OpenStreetMap. Due to its high-quality worldwide coverage, OpenStreetMap (OSM) is a collaborative online mapping platform commonly used by researchers. OpensStreetMap also provides extensive, user-contributed, open data on transport networks. OpenStreetMap’s raw data contain many interstitial nodes in the middle of street segments (forming an expansion graph) to allow streets to curve through space via a series of straight-line approximations[\cite{Boeing:2018}]. OSMnx automatically simplifies the topology for each graph to retain nodes only at intersections and dead-ends, while retaining for each edge their true spatial geometry. This provides accurate intersection counts and edge length measures for comparison between  networks with planar and nonplanar representations.[\cite{Boeing:2017}]
 
 \section{Selected Cities}
-As previously stated, this study selected 22 urban road networks from around the world, which are listed in Table \ref{tab:Selected Cities}, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of 22 data sets appears to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks one by one. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values [\cite{Han:2020}]. Furthermore, approximately 40 road network samples were chosen for on a preliminary basis for this study. Road Network samples with similar patterns and parameters were removed to clearly express the road network boundary and data distribution.
+As previously stated, this study selected twenty-two urban road networks from around the world, which are listed in Table \ref{tab:Selected Cities}, along with their characteristic urban form and Node and Edge size count, to determine whether road network types in different regions share any similarities. As discussed in Chapter 2, road network data sets can be classified into five basic pattern types: tree-like, grid, cul-de-sac, linear, and radial. Despite the fact that the number of twenty-two data sets appear to be small, this study believes that these data sets demonstrate the dependability of the study objectives and results for the following reasons. First, despite the fact that the appearance of the city varies greatly, the main pattern differences in the urban road network can be found in the shape of intersections and the density of the road network. The only thing that needs to be determined in a classification study are the characteristics of the reference network; it is not necessary to identify all of the networks individually. Over Reliance on large-scale statistical data may make accurate identification of road network features impossible, as some features may become submerged in the massive statistical values [\cite{Han:2020}]. Furthermore, approximately 40 road network samples were chosen for on a preliminary basis for this study. Road Network samples with similar patterns and parameters were removed to clearly express the road network boundary and data distribution.
 Furthermore, each sample area was limited to two square kilometers for ease of comparison. (one kilometer by one kilometer)
 
 
@@ -85,14 +85,13 @@ City of Westminster, London     & UK          & Tree         & Europe        & 6
 \section{Road Network Similarity Metrics}
 All the network-similarity metrics used for this study are categorized based on two criteria. First, at what level of the network does the method operate? Second, what type of comparison does it use? 
 
-For the first criteria, 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level;1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global/network level[\cite{Soundarajan:2014}].
-
+For the first criteria, 3 levels are defined, they are micro, mezzo, and macro. As their names imply, at the micro-level, a metric extracts features at the node level; 1 at the mezzo-level, the metric extracts features from communities; and at the macro-level, it extracts features from the global or network level [\cite{Soundarajan:2014}].
 
 For the second criteria, there are 3 types: vector-based, classifier-based, and matching-based. For this study, we will be using the vector-based and classifier-based types, which are described below. 
 
 For the Vector-based metrics, feature vectors F1 and F2 are assigned to each network G1 and G2, respectively. They define the similarity between G1 and G2 as $1-Canberra(F1, F2)$ [\cite{Richards:2010}].
 
-For the Classifier-based metric, a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). FA feature vector describing the structural properties of each of these structures (e.g., the number of edges within a node neighborhood) is calculated for each of these structures, and the feature vectors are then labeled with the name of their respective network [\cite{Soundarajan:2014}]. Cross-validation is then used afterward to determine if a Support vector machine (SVM) can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. The test set in each round of cross-validation contains feature vectors from G1 and G2; resulting in a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. The similarity between G1 and G2 is defined as $1-Canberra(F1, F2)$. The SVM will be unable to distinguish between the two classes of feature vectors if G1 and G2 have very similar local structures, and F1 and F2 will be very similar. The distance between F1 and F2 will be very short, resulting in a high degree of similarity. If G1 and G2 have drastically different structures, the SVM will have a high classification accuracy but a low similarity score.
+For the Classifier-based metric, a fixed number of structures is first identified within each network (such as random walks, communities, or node neighborhoods). FA feature vector describing the structural properties of each of these structures (e.g., the number of edges within a node neighborhood) is calculated for each of these structures, and the feature vectors are then labeled with the name of their respective network [\cite{Soundarajan:2014}]. Cross-validation is then used afterward to determine if a Support Vector Machine (SVM) can accurately distinguish between the feature vectors from network G1 and the feature vectors from network G2. The test set in each round of cross-validation contains feature vectors from G1 and G2; resulting in a length-2 feature vector (respectively, F1 and F2) describing the fraction of feature vectors from that network that were classified as belonging to G1 and the fraction that were classified as belonging to G2. The similarity between G1 and G2 is defined as $1-Canberra(F1, F2)$. The SVM will be unable to distinguish between the two classes of feature vectors if G1 and G2 have very similar local structures, and F1 and F2 will be very similar. The distance between F1 and F2 will be very short, resulting in a high degree of similarity. If G1 and G2 have drastically different structures, the SVM will have a high classification accuracy but a low similarity score.
 
 For the matching-based metric, see [\cite{Soundarajan:2014}] which goes into detail how this approach is described and can be applied. 
 
@@ -112,7 +111,7 @@ Table \ref{tab:Road Network Similarity Methods} categorizes all road network-sim
 
 \subsection{Shortest Path Kernel}
 
-According to [\cite{Karsten:2005}], the shortest-path kernel decomposes graphs into shortest paths and compares pairs of shortest paths consistent with their lengths and also the labels of their endpoints. The first step of the shortest-path kernel is to transform the input graphs into shortest-paths graphs[\cite{Siglidis:2018}]. Given an input graph , a new graph  (i.e. its shortest-path graph) is created. The shortest-path graph  contains the same set of vertices as the graph from which it originates. The edge set of the former is a superset of that of the latter, since in the shortest-path graph , there exists an edge between all vertices which are connected by a walk within the original graph . To complete the transformation, labels are assigned to all the edges of the shortest-path graph . The label of each edge is set equal to the shortest distance between its endpoints within the original graph .
+According to [\cite{Karsten:2005}], the shortest-path kernel decomposes graphs into shortest paths and compares pairs of shortest paths consistent with their lengths and also the labels of their endpoints. The first step of the shortest-path kernel is to transform the input graphs into shortest-paths graphs [\cite{Siglidis:2018}]. Given an input graph , a new graph  (i.e. its shortest-path graph) is created. The shortest-path graph  contains the same set of vertices as the graph from which it originates. The edge set of the former is a superset of that of the latter, since in the shortest-path graph, there exists an edge between all vertices which are connected by a walk within the original graph. To complete the transformation, labels are assigned to all the edges of the shortest-path graph. The label of each edge is set equal to the shortest distance between its endpoints within the original graph.
 
 Given the above procedure for transforming a graph into a shortest-path graph, the shortest-path kernel is defined as follows:
 
@@ -144,14 +143,13 @@ In terms of runtime complexity, the shortest-path kernel is very expensive becau
 \subsection{Random Walk Kernel}
 The random walk kernels are probably the most well-studied family of graph kernels, which quantify the similarity between two graphs based on the number of common walks in the two graphs [\cite{Kashima:2003, Gartner:2003, Mahé:2004, Karsten:2005, Vishwanathan:2010, Sugiyama:2015, Siglidis:2018}].
 
-This family of kernels has focused primarily on counting matching walks in the two input graphs. Random walk kernels come in several variations. The $k$ step random walk kernel compares random walks in the two graphs up to length.  The geometric random walk kernel [\cite{Gartner:2003}]is the most widely used kernel in this family, comparing walks up to infinity and assigning a weight $\lambda^{k}(\lambda<1)$ to walks of length $k$ to ensure convergence of the corresponding geometric series. Following that, a formal definition of the geometric random walk kernel is defined below. 
+This family of kernels has focused primarily on counting matching walks in the two input graphs. Random walk kernels come in several variations. The $k$ step random walk kernel compares random walks in the two graphs up to length.  The geometric random walk kernel [\cite{Gartner:2003}] is the most widely used kernel in this family, comparing walks up to infinity and assigning a weight $\lambda^{k}(\lambda<1)$ to walks of length $k$ to ensure convergence of the corresponding geometric series. Following that, a formal definition of the geometric random walk kernel is defined below. 
 
 Given two node-labeled graphs $G_{i}=\left(V_{i}, E_{i}\right)$  and $G_{j}=\left(V_{j}, E_{j}\right)$ , their direct product $\boldsymbol{G}_{\times}=\left(V_{\times}, \boldsymbol{E}_{\times}\right)$ is a graph with vertex set:
 
 \begin{equation}
 V_{\times}=\left\{\left(v_{i}, v_{j}\right): v_{i} \in V_{i} \wedge v_{j} \in V_{j} \wedge \ell\left(v_{i}\right)=\ell\left(v_{j}\right)\right\}   
 \end{equation}
-Source: \cite{Siglidis:2018}
 
 and edge set:
 
@@ -160,7 +158,7 @@ E_{\times}=\left\{\left\{\left(v_{i}, v_{j}\right),\left(u_{i}, u_{j}\right)\rig
 \end{equation}
 Source: \cite{Siglidis:2018}
 
-A random walk on $G_{\times}$ is equivalent to performing a simultaneous random walk on both $G_{i}$ and $G_{j}$. As the geometric random walk kernel counts the common walks (of potentially infinite length) in the two graphs, it can therefor be defined as follows.
+A random walk on $G_{\times}$ is equivalent to performing a simultaneous random walk on both $G_{i}$ and $G_{j}$. As the geometric random walk kernel counts the common walks (of potentially infinite length) in the two graphs, it can therefore be defined as follows.
 
 \subsubsection{Definition: Geometric Random Walk Kernel}
 
@@ -179,9 +177,9 @@ In terms of runtime complexity, the direct computation of the geometric random w
 
 
 \subsection{Network Laplacian Spectral Descriptor (NetLSD)}
-NetLSD is a permutation- and size-invariant, scale-adaptive, and efficiently computable graph representation method that allows for straightforward comparisons of large graphs.NetLSD creates a compact signature that inherits the Laplacian spectrum's formal properties, particularly its heat or wave kernel, and thus hears the shape of a graph. [\cite{Tsitsulin:2018}]
+NetLSD is a permutation- and size-invariant, scale-adaptive, and efficiently computable graph representation method that allows for straightforward comparisons of large graphs. NetLSD creates a compact signature that inherits the Laplacian spectrum's formal properties, particularly its heat or wave kernel, and thus hears the shape of a graph. [\cite{Tsitsulin:2018}]
 
-The NetLSD distance LSD between two graphs, $G$ and $G^{\prime}$, is the Frobenius norm between the heat trace signatures of the normalized Laplacians $\mathbf{L}$ and $\mathbf{L}^{\prime}$[\cite{Tsitsulin:2018}]. The heat kernel matrix is calculated as
+The NetLSD distance LSD between two graphs, $G$ and $G^{\prime}$, is the Frobenius norm between the heat trace signatures of the normalized Laplacians $\mathbf{L}$ and $\mathbf{L}^{\prime}$ [\cite{Tsitsulin:2018}]. The heat kernel matrix is calculated as
 
 \begin{equation}
 H_{t}=e^{-t \mathbf{L}}=\sum_{j=1}^{n} e^{-t \lambda_{j}} \phi_{j} \phi_{j}^{T}
@@ -205,7 +203,7 @@ Source: \cite{Tsitsulin:2018}
 In terms of runtime complexity, the computational complexity of LSD is $O\left(n^{3}\right)$ because of the spectral decomposition of both graphs' Laplacian matrices.
 
 \subsection{Degree Divergence}
-The degree divergence also known as the degree distribution Jensen-Shannon divergence [\cite{Lin:1991}] is the graph distance measure between the empirical degree distributions of two graphs. The descriptor $\psi_{G}$ is the empirical degree distribution encoded in the set of numbers $\left\{p_{k}(G)\right\}_{k \geq 0}:=\mathbf{p}$ given by $p_{k}(G):=n_{k}(G) /n$ for a $n$-node graph $G$, where $n_{k}(G)=\sum_{i=1}^{n} 1\left\{k_{i}=\right.$ $k\}$. $k_{i}=$ $\sum_{j=1}^{n} A_{i j}$ is the degree of node $i$ in terms of the adjacency matrix A of $G$, with $1\{-\}$ being the indicator function.  The Jensen-Shannon divergence between two such distributions [\cite{Carpi:2011}] is the degree JensenShannon divergence or DJS distance between the graphs [\cite{Tsitsulin:2018}]:
+The degree divergence also known as the degree distribution Jensen-Shannon divergence [\cite{Lin:1991}] is the graph distance measure between the empirical degree distributions of two graphs. The descriptor $\psi_{G}$ is the empirical degree distribution encoded in the set of numbers $\left\{p_{k}(G)\right\}_{k \geq 0}:=\mathbf{p}$ given by $p_{k}(G):=n_{k}(G) /n$ for a $n$-node graph $G$, where $n_{k}(G)=\sum_{i=1}^{n} 1\left\{k_{i}=\right.$ $k\}$. $k_{i}=$ $\sum_{j=1}^{n} A_{i j}$ is the degree of node $i$ in terms of the adjacency matrix A of $G$, with $1\{-\}$ being the indicator function.  The Jensen-Shannon divergence between two such distributions [\cite{Carpi:2011}] is the degree Jensen-Shannon divergence or DJS distance between the graphs [\cite{Tsitsulin:2018}]:
 
 \begin{equation}
 D_{\text {DJs }}\left(G, G^{\prime}\right)=H\left[\mathbf{p}_{+}\right]-\frac{1}{2}\left(H[\mathbf{p}]+H\left[\mathbf{p}^{\prime}\right]\right)
@@ -217,7 +215,7 @@ where $\mathbf{P}_{+}=\left\{\left(p_{k}+p_{k}^{\prime}\right) / 2\right\}_{k \g
 In terms of runtime complexity, the computational complexity of degree divergence is $O(n)$, which results from computing two degree distributions (which is $O(n)$ ) and then comparing them (which is $O\left(k_{+}\right)$, with $k_{+}<n$ being the maximum degree in either network)\cite{Tsitsulin:2018}.
 
 \subsection{Laplacian Spectrum Distances}
-Laplacian Spectrum distance is the graph distance measure between the Laplacian spectra of $G_1$ and ${G_2}$. The spectra of both normalized and unormalized Laplacian matrices are computed. The discrete spectra are then convolved with a kernel to generate continuous ones. Finally, a metric is used to compare these distributions. The results dictionary also keeps a 2-tuple of the underlying adjacency matrices in the key $adjacency$ $matrices$, the Laplacian matrices in $laplacian$ $matrices$, and the Laplacian eigenvalues in $eigenvalues$. If the compared networks are directed, the augmented adjacency matrices are computed and stored in $augmented$ $adjacency$ $matrices$. [\cite{Tsitsulin:2018}] goes into greater detail about calculating Laplacian Spectrum Distances.
+Laplacian Spectrum distance is the graph distance measure between the Laplacian spectra of $G_1$ and ${G_2}$. The spectra of both normalized and unormalized Laplacian matrices are computed. The discrete spectra are then convolved with a kernel to generate continuous ones. Finally, a metric is used to compare these distributions. The result's dictionary also keeps a 2-tuple of the underlying adjacency matrices in the key $adjacency$ $matrices$, the Laplacian matrices in $laplacian$ $matrices$, and the Laplacian eigenvalues in $eigenvalues$. If the compared networks are directed, the augmented adjacency matrices are computed and stored in $augmented$ $adjacency$ $matrices$. [\cite{Tsitsulin:2018}] goes into greater detail about calculating Laplacian Spectrum Distances.
 
 In terms of runtime complexity, the computational complexity of laplacian spectrum distances is $O(n^{3})$, which results from the spectral decomposition of the laplacian matrices of both graphs [\cite{Tsitsulin:2018}].
 
@@ -239,17 +237,17 @@ NetSimile is a method for comparing two graphs, $G$ and $G^{\prime}$, based on t
 7. number of neighbors of the ego network $n n_{j}^{(e g o)}=$ $\sum_{i} 1_{\left\{\exists l \in \mathcal{N}_{f}: i \sim l, i \chi_{j}\right\}}$
 
 
-The node-level quantities are then summarized into $\mathbf{p}$ and $\mathbf{p}^{\prime}$, which are $7 \times 5$ signature vectors consisting of the median,mean, standard deviation, skewness, and kurtosis of each feature. NetSimile uses the Canberra distance to arrive at a final scalar distance.[\cite{Tsitsulin:2018}]
+The node-level quantities are then summarized into $\mathbf{p}$ and $\mathbf{p}^{\prime}$, which are $7 \times 5$ signature vectors consisting of the median, mean, standard deviation, skewness, and kurtosis of each feature. NetSimile uses the Canberra distance to arrive at a final scalar distance.[\cite{Tsitsulin:2018}]
 
 \begin{equation}
 D_{\mathrm{KSE}}\left(G, G^{\prime}\right)=d\left(\mathbf{p}, \mathbf{p}^{\prime}\right)=\sum_{i=1}^{n} \frac{\left|p_{i}-p_{i}^{\prime}\right|}{\left|p_{i}\right|+\left|p_{i}^{\prime}\right|}
 \end{equation}
 \caption{Source: \cite{Tsitsulin:2018}}
 
-In terms of runtime complexity, the computational complexity of NetSimile depends on two parts: features extraction and features aggregation. Because features are all locally defined, selecting a random edge and choosing an endpoint will take $O(q n)$, where $q$ is the average degree of a node [\cite{Henderson:2011}]. Hence, the overall complexity is $O(q n+n \log n)$, because the feature aggregation is $O(n \ln n)$ [\cite{Berlingerio:2012, Tsitsulin:2018}.
+In terms of runtime complexity, the computational complexity of NetSimile depends on two parts: features extraction and features aggregation. Because features are all locally defined, selecting a random edge and choosing an endpoint will take $O(q n)$, where $q$ is the average degree of a node [\cite{Henderson:2011}]. Hence, the overall complexity is $O(q n+n \log n)$, because the feature aggregation is $O(n \ln n)$ [\cite{Berlingerio:2012, Tsitsulin:2018}].
 
 \subsection{Cosine Similarity}
-Originally used in text mining for document comparison, the cosine similarity computes the angle between the document vectors, without taking into account their lengths. It assigns higher similarity to vectors that point roughly in the same direction.[\cite{scikit-learn}]
+Originally used in text mining for document comparison, the cosine similarity computes the angle between the document vectors, without taking into account their lengths. It assigns higher similarity to vectors that point roughly in the same direction. [\cite{scikit-learn}]
 The cosine similarity values calculated are in the range $\mathrm[-1, 1]$ and are then converted to a similarity measure in the range $\mathrm[0, 1]$. According to literature [\cite{Han:2012}], the most prevalent ways of deriving the similarity measure are the following:
 
 1. $s=1-d$
@@ -261,7 +259,7 @@ The cosine similarity values calculated are in the range $\mathrm[-1, 1]$ and ar
 4. $s=e^{-d^{2}}$
 
 \subsection{Euclidean Distance}
-Based on the Euclidean distance measurement approach, the euclidean based similarity  is a normalized euclidean similarity measure that calculates the shortest distance between 2 points irrespective of their dimensions.  The calculated distance $d$ converted to a similarity measure $s$ in the range $\mathrm[0, 1]$.[\cite{scikit-learn}]
+Based on the Euclidean distance measurement approach, the euclidean based similarity  is a normalized euclidean similarity measure that calculates the shortest distance between 2 points irrespective of their dimensions.  The calculated distance $d$ converted to a similarity measure $s$ in the range $\mathrm[0, 1]$. [\cite{scikit-learn}]
 
 \subsection{Jaccard Similarity}
 Originally developed by Paul Jaccard [\cite{Jaccard:1901}], the Jaccard similarity also known as the Jaccard index or Jaccard similarity coefficient measures the similarities between sets. It is defined as the size of the intersection divided by the size of the union of two sets.
@@ -285,7 +283,7 @@ For this study, the Jaccard distance is computed between two graphs $G$ and $G^{
 \begin{equation}
 D_{\mathrm{JAC}}\left(G, G^{\prime}\right)=d_{\mathrm{JAC}}\left(\mathbf{A}, \mathbf{A}^{\prime}\right)=1-\frac{|\mathbf{S}|}{|\mathbf{T}|}
 \end{equation}
-{Source:\cite{McCabe:2019}}
+{Source: \cite{McCabe:2019}}
 
 $S_{i j}=A_{i j} A_{i j}^{\prime}$ represents the intersection of edge sets between graphs $G$ and $G^{\prime}$, while $T_{i j}=S_{i j}+(1-$ $\left.A_{i j}^{\prime}\right) A_{i j}+\left(1-A_{i j}\right) A_{i j}^{\prime}$ represents the union of edge sets between graphs. Here, $|\mathbf{S}|$ is the sum over the $S_{i j}$ and the same for $|\mathbf{T}|$. 
 
